@@ -14,7 +14,7 @@ const router = createRouter({
     {
       path: '/signin',
       name: 'signin',
-      component: () => import('@/views/SignInView.vue')
+      component: () => import('../views/SignInView.vue')
     },
     {
       path: '/about',
@@ -26,16 +26,15 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
-
   if (userStore.user === undefined) {
     await userStore.fetchUser()
   }
-
-  if (userStore.user === null && to.name !== 'signin') {
-    next({ name: 'signin' })
+  if (to.name === 'login' && userStore.user) {
+    next('/')
+  } else if (to.name !== 'login' && to.meta.requiresAuth && !userStore.user) {
+    next('/login')
   } else {
     next()
   }
 })
-
 export default router
