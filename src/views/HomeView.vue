@@ -2,6 +2,8 @@
 import { useTasksStore } from '@/stores/tasksStore'
 import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
+import { useUserStore } from '@/stores/userStore'
+import { useRouter } from 'vue-router'
 const tasksStore = useTasksStore()
 const { tasks } = storeToRefs(tasksStore)
 const taskTitle = ref('')
@@ -27,12 +29,25 @@ const _editTask = async (task) => {
     console.error('Error al actualizar la tarea....', error)
   }
 }
+
+
+const userStore = useUserStore()
+const router = useRouter()
+// Expose the signOut action for the template
+const logOut = async () => {
+await userStore.signOut()
+router.push('/signin')
+}
+
 onMounted(() => {
   tasksStore.fetchTasks()
 })
 </script>
 <template>
 	<section>
+    <button  @click="logOut" >Log Out</button>
+
+
 	  <h1>Home view</h1>
 	  <span>Task: {{ tasks.length }}</span>
 	  <li v-for="task in tasks" :key="task.id">
