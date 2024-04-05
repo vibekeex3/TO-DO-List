@@ -32,11 +32,12 @@ const _editTask = async (task) => {
 
 
 const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 const router = useRouter()
 // Expose the signOut action for the template
 const logOut = async () => {
 await userStore.signOut()
-router.push('/signin')
+router.push('/signin') // presssing the button redirects to the SignInView
 }
 
 onMounted(() => {
@@ -46,10 +47,11 @@ onMounted(() => {
 <template>
 	<section>
     <button  @click="logOut" >Log Out</button>
-
+    <p>Logged in as: {{ user.email }}</p>
 
 	  <h1>Home view</h1>
-	  <span>Task: {{ tasks.length }}</span>
+ 
+	  <span>Tasks: {{ tasks.length }}</span>
 	  <li v-for="task in tasks" :key="task.id">
 		<input type="text" v-model="task.title" />
 
@@ -72,6 +74,11 @@ onMounted(() => {
 <style scoped>
 
 * {
-background-color: darksalmon;
+background-color: lightcyan;
+line-height: 2.0;
+}
+
+li input {
+  border-style: none;
 }
 </style>
