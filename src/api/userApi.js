@@ -5,15 +5,21 @@ export const fetchActualUser = async () => {
   return data?.session?.user || null
 }
 
-export const createNewUser = async (email, password) => {
-  const { data, error } = await supabase.auth.signUp({ email, password })
-
+export const createNewUser = async (username, email, password) => {
+  const { data, error } = await supabase.auth.signUp({ 
+    email, 
+    password,
+    options: {
+      data: { username }
+    }
+  })
   if (error) {
-    throw new Error(error.message)
+    throw new Error(error.message);
   }
 
-  return data
+  return data.user; 
 }
+
 
 export const logIn = async (email, password) => {
   const {

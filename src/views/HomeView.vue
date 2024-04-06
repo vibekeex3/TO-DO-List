@@ -4,6 +4,8 @@ import { storeToRefs } from 'pinia'
 import { onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
+// import EditTask from 'EditView'
+
 const tasksStore = useTasksStore()
 const { tasks } = storeToRefs(tasksStore)
 const taskTitle = ref('')
@@ -36,8 +38,8 @@ const { user } = storeToRefs(userStore)
 const router = useRouter()
 // Expose the signOut action for the template
 const logOut = async () => {
-await userStore.signOut()
-router.push('/signin') // presssing the button redirects to the SignInView
+  await userStore.signOut()
+  router.push('/signin') // presssing the button redirects to the SignInView
 }
 
 onMounted(() => {
@@ -45,37 +47,37 @@ onMounted(() => {
 })
 </script>
 <template>
-	<section>
-    <button  @click="logOut" >Log Out</button>
-    <p>Logged in as: {{ user.email }}</p>
+  <section>
+    <button @click="logOut">Log Out</button>
 
-	  <h1>Home view</h1>
- 
-	  <span>Tasks: {{ tasks.length }}</span>
-	  <li v-for="task in tasks" :key="task.id">
-		<input type="text" v-model="task.title" />
+    <h1>Hello {{ user.user_metadata.username }} !</h1>
 
-		<button  @click="_deleteTask(task.id)" >Delete</button>
-      <button @click="_editTask(task.id)" >Edit</button>
-      <button  @click="_isComplete(task.id)" >Done</button>
-	  </li>
+    <span>Tasks: {{ tasks.length }}</span>
+    <li v-for="task in tasks" :key="task.id">
+      <input type="text" v-model="task.title" />
 
-	  <div>
-		<label>
-		  <input type="text" v-model="taskTitle" />
-		</label>
-		<button @click="_addTask">Add Task</button>
-	  </div>
-	</section>
-  </template>
+      <button @click="_deleteTask(task.id)">Delete</button>
+      <button @click="_editTask(task.id)">Edit</button>
+      <button @click="_isComplete(task.id)">Done</button>
+    </li>
+
+    <div>
+      <label>
+        <input type="text" v-model="taskTitle" />
+      </label>
+      <button @click="_addTask">Add Task</button>
+    </div>
+  </section>
+
+  <!-- <EditTask /> -->
+</template>
 
 
 
 <style scoped>
-
 * {
-background-color: lightcyan;
-line-height: 2.0;
+  background-color: lightcyan;
+  line-height: 2.0;
 }
 
 li input {

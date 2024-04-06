@@ -8,6 +8,7 @@ const userStore = useUserStore()
 const signTypeLogin = ref(true)
 const loginUser = ref('')
 const loginPassword = ref('')
+const registerUsername = ref('')
 const registerEmail = ref('')
 const registerPassword = ref('')
 const errorMessage = ref(null)
@@ -15,7 +16,7 @@ const errorMessage = ref(null)
 const register = async () => {
 	try {
 		errorMessage.value = null
-		await userStore.signUp(registerEmail.value, registerPassword.value)
+		await userStore.signUp(registerUsername.value, registerEmail.value, registerPassword.value)
 		router.push('/')
 	} catch (error) {
 		errorMessage.value = error.message
@@ -39,8 +40,8 @@ const _changeSignType = () => {
 		<!--inicio de sesión -->
 		<div v-if="signTypeLogin">
 			<h2>Log in</h2>
-			<input v-model="loginUser" type="email" placeholder="Correo electrónico" />
-			<input v-model="loginPassword" type="password" placeholder="Contraseña" />
+			<input v-model="loginUser" type="email" placeholder="Email" />
+			<input v-model="loginPassword" type="password" placeholder="Password" />
 			<button @click="signIn">Log in</button>
 
 			<div class="reg">
@@ -52,8 +53,8 @@ const _changeSignType = () => {
 		<!--registro de usuario -->
 		<div v-else>
 			<h2>Register</h2>
+			<input v-model="registerUsername" type="username" placeholder="Username" />
 			<input v-model="registerEmail" type="email" placeholder="Email" />
-			<input v-model="registerEmail" type="username" placeholder="Username" />
 			<input v-model="registerPassword" type="password" placeholder="Password" />
 			<button @click="register">Register</button>
 
