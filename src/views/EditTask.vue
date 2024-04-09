@@ -1,67 +1,76 @@
-<!-- <script setup>
+<script setup>
+import { ref } from 'vue'
 import { useTasksStore } from '@/stores/tasksStore'
-import { storeToRefs } from 'pinia'
-import { onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+
 const tasksStore = useTasksStore()
-const { tasks } = storeToRefs(tasksStore)
-const taskTitle = ref('')
 
-const route = useRoute()
-const router = useRouter()
-
-const actualTask = ref(null)
-const newTask = ref({
-    title: '',
-    is_complete: false,
+const props = defineProps({
+  task: Object
 })
 
-const _updateTask = async () => {
-    await tasksStore.updateTask(actualTask.value.id, newTask.value)
-    router.push({ name: 'tasks'})
+const _isEditing = ref(false)
+const editTask = ref({ ...props.task })
+
+const _deleteTask = async () => {
+  await tasksStore.deleteTask(editTask.value.id)
 }
 
-onMounted(async() => {
-    if (!tasks.value.length) {
-        await tasksStore.fetchTasks()
-    }
+const _handleEdit = () => {
+  _isEditing.value = true
+}
 
-    const taskId = parseInt(route.params.id)
-    actualTask.value = tasks.value.find( task => task.id === taskId) || {}
-    newTask.value = {
-        title: actualTask.value.title,
-        is_complete: actualTask.value.is_complete,
-    }
-    })
+const _editTask = async () => {
+  try {
+    await tasksStore.updateTask(editTask.value)
+    console.log('Tarea actualizada !!')
+    _isEditing.value = false
 
-</script> -->
+    
+  } catch (error) {
+    console.error('Error al actualizar la tarea....', error)
+  }
+}
+</script>
 <template>
-    <!-- <button @click="logOut">Log Out</button> -->
-    <section>
-    <h1>Edit Task</h1>
-<!--     
-<form>
-
-<label>
-New task title
-<input type="text" v-model="newTask.title" />
-
-</label>
-<button @click.prevent.stop="_updateTask">Update Task</button>
-
-</form> -->
-  </section>
+  <div>
+    {{ editTask.title }}
+    <!-- {{ editTask.description }} -->
+    <!-- {{ editTask.is_complete ? 'done' : 'pending' }} -->
+    <button @click="_deleteTask" class="btn-delete">Delete</button>
+    <button @click="_handleEdit" class="btn-edit">Edit</button>
+    <div v-show="_isEditing">
+      <input type="text" v-model="editTask.title" />
+      <!-- <input type="text" v-model="editTask.description" /> -->
+      <input type="checkbox" v-model="editTask.is_complete" />
+      <button @click="_editTask" class="btn-edit">Save</button>
+    </div>
+  </div>
 </template>
 
-
-
 <style scoped>
-* {
-  background-color: lightcyan;
-  line-height: 2.0;
+.btn-delete {
+  font-size: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 174, 174, 0.394);
+  color: red;
 }
 
-li input {
-  border-style: none;
+.btn-edit {
+  font-size: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(242, 242, 32, 0.371);
+  color: rgb(94, 82, 2);
 }
+
+.btn-done {
+  font-size: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(73, 208, 5, 0.259);
+  color: green;
+}
+
+
 </style>

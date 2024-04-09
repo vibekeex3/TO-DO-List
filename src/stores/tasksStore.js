@@ -1,20 +1,25 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { fetchAllTasks, createTask, deleteSingleTask, updateSingleTask } from '@/api/tasksApi'
+import {
+  fetchAllTasks,
+  createTask,
+  deleteSingleTask,
+  updateSingleTask,
+  // addDescription
+} from '@/api/tasksApi'
 import { useUserStore } from '@/stores/userStore'
-
 
 export const useTasksStore = defineStore('tasks', () => {
   // State
   const tasks = ref([])
 
-  // Getters
-
   // Actions
- async function fetchTasks() {
+  async function fetchTasks() {
     try {
-      tasks.value = await fetchAllTasks()
-    } catch (error) { 
+      const data = await fetchAllTasks()
+      console.log(data)
+      tasks.value = data
+    } catch (error) {
       console.error(error)
     }
   }
@@ -31,6 +36,8 @@ export const useTasksStore = defineStore('tasks', () => {
       console.error(error)
     }
   }
+
+
   async function deleteTask(taskId) {
     try {
       await deleteSingleTask(taskId)
@@ -42,8 +49,12 @@ export const useTasksStore = defineStore('tasks', () => {
 
   async function updateTask(task) {
     try {
-    await updateSingleTask(task)
-  
+      const updatedTask = await updateSingleTask(task)
+
+      const taskIndex = tasks.value.findIndex((t) => t.id === updatedTask.id)
+      if (taskIndex !== -1) {
+        tasks.value[taskIndex] = updatedTask //esto es despues de llamar a supabase
+      }
     } catch (error) {
       console.error(error)
     }
@@ -53,11 +64,11 @@ export const useTasksStore = defineStore('tasks', () => {
   return {
     // State
     tasks,
-    // Getters
     // Actions
     fetchTasks,
     createNewTask,
     deleteTask,
-    updateTask
+    updateTask,
+
   }
 })
