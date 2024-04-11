@@ -23,23 +23,6 @@ const _addTask = async () => {
   await tasksStore.createNewTask(taskTitle.value)
   taskTitle.value = ''
 }
-// //Eliminamos una tarea
-// const _deleteTask = async (taskId) => {
-//   await tasksStore.deleteTask(taskId)
-// }
-// //Marcamos una tarea lista
-// const _isComplete = async (taskId) => {
-//   await tasksStore.completeTask(taskId)
-// }
-// // editamos la tarea
-// const _editTask = async (task) => {
-//   try {
-//     await tasksStore.updateTask(task)
-//     console.log('Tarea actualizada !!')
-//   } catch (error) {
-//     console.error('Error al actualizar la tarea....', error)
-//   }
-// }
 
 
 const userStore = useUserStore()
@@ -53,60 +36,105 @@ const logOut = async () => {
   router.push('/login') // presssing the button redirects to the SignInView
 }
 
+
+
+
 onMounted(() => {
   tasksStore.fetchTasks()
 })
 </script>
-<template>
-  <section>
-    <button @click="logOut">Log Out</button>
 
-    <!-- <h1>Hello {{ user.user_metadata.username }} !</h1> -->
+<template>
+  <section class="logout">
+    <button @click="logOut">Log Out</button>
+  </section>
+
+  <section>
+    <h1>Hello {{ user.user_metadata.username }} !</h1>
     <span> You have {{ tasks.length }} tasks:</span>
+   
 
   </section>
 
-<section>
+  <section>
 
-  <div class="container-principal">
-    <div class="container-card">
-    
-    <div class="container-list">
-      <ul class="list-task">
+    <div class="container-principal">
+      <div class="container-card">
 
-    
-        <li v-for="(task, index) in tasks" :key="task.id" :class="{ 'color-par': index % 2 === 0 }">
-          <EditTask :task="task" />
-        </li>
-      </ul>
+        <div class="container-list">
+          <ul>
+
+
+            <li v-for="(task, index) in tasks" :key="task.id">
+              <EditTask :task="task" />
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
-</section>
+  </section>
 
-<section>
-  <h4>Add a new task</h4>
+  <section class="add-task">
+    <h5>Add a new task (minimum 3 characters)</h5>
+    <div>
+      <label for="title"></label>
+      <input v-model="taskTitle" type="text" placeholder="Title" id="title" />
 
-      <div>
-    <label for="title">Title:</label>
-    <input v-model="taskTitle" type="text" placeholder="Title" id="title" />
-
-    <button @click="_addTask" class="btn-add">Add</button>
-  </div>
-
+      <button @click="_addTask" class="btn-add">Add</button>
+    </div>
   </section>
 </template>
 
 
 
 <style scoped>
-* {
-  background-color: lightcyan;
-  line-height: 2.0;
-  color: gray;
+section {
+  margin-top: 1rem;
 }
+
+
+* {
+  background-color: whitesmoke;
+  line-height: 2.0;
+  color: darkslategray;
+}
+
+.logout {
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: lightgray;
+}
+
+.logout button {
+  background-color: lightcoral;
+  color: white;
+  font-weight: 600;
+}
+
+.add-task button {
+  background-color:lightskyblue;
+}
+
+
 
 li input {
   border-style: none;
+}
+
+
+li {
+  margin: 0;
+  list-style-type: none;
+}
+
+ul {
+  margin-left: 0;
+  padding-left: 0;
+
 }
 </style>

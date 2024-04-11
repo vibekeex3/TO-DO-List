@@ -4,12 +4,31 @@
 			<nav>
 				<RouterLink to="/">Home</RouterLink>
 				<RouterLink to="/about">About</RouterLink>
+				<button @click="logOut">Log Out</button>
 			</nav>
 		</div>
 	</header>
 
 	<RouterView />
 </template>
+
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/userStore'
+import { useRouter } from 'vue-router'
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
+
+const router = useRouter()
+// Expose the signOut action for the template
+const logOut = async () => {
+  await userStore.signOut()
+  router.push('/login') // presssing the button redirects to the SignInView
+}
+
+</script>
+
+
 
 <style scoped>
 header {

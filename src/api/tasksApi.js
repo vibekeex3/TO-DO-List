@@ -11,7 +11,7 @@ export const fetchAllTasks = async () => {
 }
 
 export const createTask = async (task) => {
-  debugger
+
   const { error, data } = await supabase.from(TABLE_NAME).insert(task).select()
   if (error) {
     throw new Error(error.message)

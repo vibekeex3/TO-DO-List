@@ -30,47 +30,71 @@ const _editTask = async () => {
     console.error('Error al actualizar la tarea....', error)
   }
 }
+
+
+// COLOR CODED
+const isGrey = ref(true); // Initial color of the container is grey
+
+function toggleColor() {
+  isGrey.value = !isGrey.value; // Toggle the color
+}
 </script>
 <template>
-  <div>
-    {{ editTask.title }}
+  <div class="color-coded" @click="toggleColor" :class="{ grey: isGrey, green: !isGrey }">
+    <input type="checkbox" v-model="editTask.is_complete" />
+     {{ editTask.title }}
+   
     <!-- {{ editTask.description }} -->
     <!-- {{ editTask.is_complete ? 'done' : 'pending' }} -->
-    <button @click="_deleteTask" class="btn-delete">Delete</button>
-    <button @click="_handleEdit" class="btn-edit">Edit</button>
+    <button @click="_deleteTask" class="btn-delete">  <font-awesome-icon icon="fa-solid fa-trash" /></button>
+ 
+  
+    <button @click="_handleEdit" class="btn-edit"><font-awesome-icon icon="fa-solid fa-pen-to-square" /></button>
+
     <div v-show="_isEditing">
       <input type="text" v-model="editTask.title" />
       <!-- <input type="text" v-model="editTask.description" /> -->
-      <input type="checkbox" v-model="editTask.is_complete" />
-      <button @click="_editTask" class="btn-edit">Save</button>
+     
+      <button @click="_editTask">Save</button>
     </div>
   </div>
 </template>
 
 <style scoped>
-.btn-delete {
-  font-size: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: rgba(255, 174, 174, 0.394);
-  color: red;
-}
 
-.btn-edit {
-  font-size: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: rgba(242, 242, 32, 0.371);
-  color: rgb(94, 82, 2);
-}
-
-.btn-done {
-  font-size: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: rgba(73, 208, 5, 0.259);
-  color: green;
+.btn-delete, .btn-edit {
+  margin: 0 3px;
+  border-style: none; /* This also removes the border */
 }
 
 
+
+div.color-coded {
+  line-height: 2.5;
+  box-sizing: border-box;
+  padding-left: 0.6rem;
+  margin-top: 5px;
+  
+  cursor: pointer; /* Indicates the element is clickable */
+  border-radius: 8px;
+}
+
+div.color-coded input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+input {
+  padding: 0.5rem;
+  background-color: aqua;
+  margin-bottom: 1rem;
+}
+.grey {
+  background-color: lightgrey;
+  color: black; /* Setting the text color for contrast */
+}
+
+.green {
+  background-color: lightgreen;
+  color: black; /* Setting the text color for contrast */
+}
 </style>

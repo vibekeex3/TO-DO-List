@@ -12,25 +12,32 @@ const registerUsername = ref('')
 const registerEmail = ref('')
 const registerPassword = ref('')
 const errorMessage = ref(null)
+
+
 //registrar un nuevo usuario
 const register = async () => {
-	try {
-		errorMessage.value = null
-		await userStore.signUp(registerUsername.value, registerEmail.value, registerPassword.value)
-		router.push('/')
-	} catch (error) {
-		errorMessage.value = error.message
-	}
+  try {
+    await userStore.validateEmail(registerEmail.value)
+    await userStore.signUp(registerEmail.value, registerPassword.value)
+    router.push({ name: 'tasks' })
+  } catch (error) {
+    console.error(error)
+    window.alert('Error: Insert a valid email.')
+  }
 }
+
 //Iniciar sesión
 const signIn = async () => {
-	try {
-		await userStore.signIn(loginUser.value, loginPassword.value)
-		router.push('/')
-	} catch (error) {
-		console.error(error)
-	}
+  try {
+    await userStore.validateEmail(loginUser.value)
+    await userStore.signIn(loginUser.value, loginPassword.value)
+    router.push({ name: 'home' })
+  } catch (error) {
+    console.error(error)
+    window.alert('Error: Insert a valid email.')
+  }
 }
+
 const _changeSignType = () => {
 	signTypeLogin.value = !signTypeLogin.value
 }
@@ -40,8 +47,8 @@ const _changeSignType = () => {
 		<!--inicio de sesión -->
 		<div v-if="signTypeLogin">
 			<h2>Log in</h2>
-			<input v-model="loginUser" type="email" placeholder="Email" />
-			<input v-model="loginPassword" type="password" placeholder="Password" />
+			<input v-model="loginUser" type="email" placeholder="Email" required/>
+			<input v-model="loginPassword" type="password" placeholder="Password" required/>
 			<button @click="signIn">Log in</button>
 
 			<div class="reg">
@@ -53,9 +60,9 @@ const _changeSignType = () => {
 		<!--registro de usuario -->
 		<div v-else>
 			<h2>Register</h2>
-			<input v-model="registerUsername" type="username" placeholder="Username" />
-			<input v-model="registerEmail" type="email" placeholder="Email" />
-			<input v-model="registerPassword" type="password" placeholder="Password" />
+			<input v-model="registerUsername" type="username" placeholder="Username" required/>
+			<input v-model="registerEmail" type="email" placeholder="Email" required/>
+			<input v-model="registerPassword" type="password" placeholder="Password" required/>
 			<button @click="register">Register</button>
 
 			<div class="log">

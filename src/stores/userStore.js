@@ -20,6 +20,19 @@ export const useUserStore = defineStore('user', () => {
     }
   }
 
+  // validate of the email format is correct
+  async function validateEmail(email) {
+    return new Promise((resolve, reject) => {
+      const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!validEmail.test(email)) {
+        reject("Error: Insert a valid email.");
+      } else {
+        resolve(true);
+      }
+    });
+  }
+
+  
   async function signUp(username, email, password) {
     user.value = await createNewUser(username, email, password)
   }
@@ -50,6 +63,7 @@ try {
     fetchUser,
     signUp,
     signIn,
-    signOut
+    signOut,
+    validateEmail
   }
 })
