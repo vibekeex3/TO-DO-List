@@ -1,10 +1,11 @@
 <script setup>
 import { useTasksStore } from '@/stores/tasksStore'
 import { storeToRefs } from 'pinia'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import EditTask from '@/views/EditTask.vue'
+import SelectionBar from '@/components/SelectionBar.vue'
 
 
 
@@ -37,6 +38,27 @@ const logOut = async () => {
 }
 
 
+// selection bar - FILTER TASK FUNCTION
+
+const filter = ref('all'); // 'all', 'completed', or 'pending'
+
+// A computed property for filtering tasks based on the selected filter
+const filteredTasks = computed(() => {
+  switch (filter.value) {
+    case 'completed':
+      return tasks.value.filter(task => task.is_complete);
+    case 'pending':
+      return tasks.value.filter(task => !task.is_complete);
+    case 'all': // Handle the 'all' filter option
+    default:
+      return tasks.value; // If filter is 'all', simply return all tasks
+  }
+});
+
+
+function filterTasks(selectedFilter) {
+  filter.value = selectedFilter;
+}
 
 
 onMounted(() => {
@@ -55,6 +77,7 @@ onMounted(() => {
    
 
   </section>
+  <SelectionBar @filter="filterTasks" />
 
   <section>
 
@@ -65,7 +88,7 @@ onMounted(() => {
           <ul>
 
 
-            <li v-for="(task, index) in tasks" :key="task.id">
+            <li v-for="(task, index) in filteredTasks" :key="task.id">
               <EditTask :task="task" />
             </li>
           </ul>
@@ -95,7 +118,6 @@ section {
 
 * {
   background-color: whitesmoke;
-  line-height: 2.0;
   color: darkslategray;
 }
 
@@ -116,9 +138,6 @@ button {
   font-weight: 600;
 }
 
-.add-task button {
-  background-color:lightskyblue;
-}
 
 
 
@@ -137,4 +156,30 @@ ul {
   padding-left: 0;
 
 }
+
+.add-task {
+  padding-left: 0.6rem;
+}
+
+
+.add-task h5 {
+line-height: 2.0;
+}
+
+input[type="text"] {
+  padding: 0.5rem;
+  width: 270px;
+  background-color: whitesmoke;
+  margin: 0 5px 10px 0;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: lightgrey;
+}
+
+.add-task button {
+  background-color:lightskyblue;
+  padding: 0.5rem;
+}
+
+
 </style>
