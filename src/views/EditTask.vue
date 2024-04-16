@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useTasksStore } from '@/stores/tasksStore'
+import ConfirmationDialog from '@/components/ConfirmationDialog.vue';
+
 
 const tasksStore = useTasksStore()
 
@@ -31,27 +33,49 @@ const _editTask = async () => {
   }
 }
 
+const handleUpdateState = async () => {
+  try {
+    await _editTask()
+  } catch (error) {
+    console.error('Error al actualizar la tarea....', error)
+  }
+}
 
+// POP UP DIALOG WINDOW
+const isDialogVisible = ref(false);
 
+const deleteTask = async (taskId) => {
+  // Logic to delete the task, possibly communicating with your backend or store
+};
+
+const confirmDelete = () => {
+  deleteTask(taskId); // Assume taskId is obtained appropriately
+  isDialogVisible.value = false;
+};
 </script>
 <template>
-  <div class="color-coded" :class="{ green: editTask.is_complete, grey: !editTask.is_complete }" >
+  <div class="color-coded" :class="{ green: editTask.is_complete, grey: !editTask.is_complete }">
 
 
 
     <div class="input-group">
       <div class="task-info">
-        <input type="checkbox" v-model="editTask.is_complete"   />
+        <input type="checkbox" @change="handleUpdateState" v-model="editTask.is_complete" />
 
         {{ editTask.title }}
       </div>
       <!-- {{ editTask.description }} -->
       <!-- {{ editTask.is_complete ? 'done' : 'pending' }} -->
       <div class="task-actions">
-        <button @click="_deleteTask" class="btn-delete"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
+        <button @click="isDialogVisible = true" class="btn-delete"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
             size="lg" /></button>
         <button @click="_handleEdit" class="btn-edit"><font-awesome-icon icon="fa-solid fa-pen-to-square"
             size="lg" /></button>
+            <ConfirmationDialog 
+      :isVisible="isDialogVisible" 
+      @confirm="_deleteTask" 
+      @cancel="() => isDialogVisible = false"
+    />
       </div>
     </div>
 
@@ -68,13 +92,12 @@ const _editTask = async () => {
 </template>
 
 <style scoped>
-
 .btn-delete,
 .btn-edit {
   margin: 0 3px;
   border-style: none;
   border-radius: 4px;
-background-color: transparent;
+  background-color: transparent;
   position: relative;
   right: 5px;
 }
@@ -96,7 +119,8 @@ div.color-coded {
   align-items: center;
 }
 
-.task-info, .task-actions {
+.task-info,
+.task-actions {
   display: flex;
   align-items: center;
 }
