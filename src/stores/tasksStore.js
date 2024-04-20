@@ -24,19 +24,34 @@ export const useTasksStore = defineStore('tasks', () => {
     }
   }
 
-  async function createNewTask(task) {
-    const userStore = useUserStore()
-    try {
-      const newTask = await createTask({
-        title: task,
-        user_id: userStore.user.id
-      })
-      tasks.value.push(newTask)
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // async function createNewTask(task) {
+  //   const userStore = useUserStore()
+  //   try {
+  //     const newTask = await createTask({
+  //       title: task,
+  //       user_id: userStore.user.id
+  //     })
+  //     tasks.value.push(newTask)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
 
+//new add
+async function createNewTask(taskDetails) {
+  const userStore = useUserStore();
+  try {
+    // Construct the task payload with additional details like 'type'
+    const payload = {
+      ...taskDetails, // Spreads the task details (title, type) into the payload
+      user_id: userStore.user.id, // Adds the user_id from the user store
+    };
+    const newTask = await createTask(payload); // Uses the modified payload
+    tasks.value.push(newTask);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   async function deleteTask(taskId) {
     try {

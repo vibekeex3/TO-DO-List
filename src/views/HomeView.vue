@@ -6,24 +6,54 @@ import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import EditTask from '@/views/EditTask.vue'
 import SelectionBar from '@/components/SelectionBar.vue'
-
+import TaskGroup from '@/components/TaskGroup.vue';
+// import TaskGroupView from '../views/TaskGroupView.vue'; // Adjust the path as necessary
+// import TaskGrouBar from '@/components/TaskGroupBar.vue';
 
 
 const tasksStore = useTasksStore()
 const { tasks } = storeToRefs(tasksStore)
-const title = ref('')
+// const title = ref('')  NO USADO
 const taskTitle = ref('')
 
 
+
+
+
+
 //Agregamos una tarea
+// const _addTask = async () => {
+//   if (taskTitle.value.length < 4) {
+//     return;
+//   }
+
+//   await tasksStore.createNewTask(taskTitle.value)
+//   taskTitle.value = ''
+// }
+const newTaskType = ref('');
+
+const taskCreationError = ref(''); // Holds error messages for task creation
+
 const _addTask = async () => {
+  taskCreationError.value = ''; // Reset error message each time
+
   if (taskTitle.value.length < 4) {
+    taskCreationError.value = 'Task title must be at least 4 characters long.';
     return;
   }
 
-  await tasksStore.createNewTask(taskTitle.value)
-  taskTitle.value = ''
+
+  await tasksStore.createNewTask({
+    title: taskTitle.value,
+    task_type: newTaskType.value, // Ensure this is included
+    // You don't need to specify user_id here as it's added in the store function
+  });
+  taskTitle.value = '';
+  newTaskType.value = '';
 }
+
+
+
 
 
 const userStore = useUserStore()
@@ -56,14 +86,19 @@ const filteredTasks = computed(() => {
 });
 
 
-function filterTasks(selectedFilter) {
-  filter.value = selectedFilter;
-}
+
+const handleGroupSelected = (selectedGroup) => {
+  console.log('Selected group:', selectedGroup);
+  // Additional logic to handle the selection...
+};
 
 
-onMounted(() => {
-  tasksStore.fetchTasks()
-})
+onMounted(async () => {
+  await tasksStore.fetchTasks();
+});
+// onMounted(() => {
+//   tasksStore.fetchTasks()
+// })
 </script>
 
 <template>
@@ -73,39 +108,14 @@ onMounted(() => {
 
   <section>
     <h1>Hello {{ user.user_metadata.username }} !</h1>
-    <span> You have {{ tasks.length }} tasks:</span>
-   
+    <h4>Choose your group of tasks</h4>
 
-  </section>
-  <SelectionBar @filter="filterTasks" />
+      <TaskGroup @groupSelected="handleGroupSelected"/>
 
-  <section>
-
-    <div class="container-principal">
-      <div class="container-card">
-
-        <div class="container-list">
-          <ul>
+</section>
 
 
-            <li v-for="(task, index) in filteredTasks" :key="task.id">
-              <EditTask :task="task" />
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section class="add-task">
-    <h5>Add a new task (minimum 3 characters)</h5>
-    <div>
-      <label for="title"></label>
-      <input v-model="taskTitle" type="text" placeholder="Title" id="title" />
-
-      <button @click="_addTask" class="btn-add">Add</button>
-    </div>
-  </section>
 </template>
 
 
@@ -139,23 +149,10 @@ button {
 }
 
 
-
-
 li input {
   border-style: none;
 }
 
-
-li {
-  margin: 0;
-  list-style-type: none;
-}
-
-ul {
-  margin-left: 0;
-  padding-left: 0;
-
-}
 
 .add-task {
   padding-left: 0.6rem;
@@ -163,7 +160,7 @@ ul {
 
 
 .add-task h5 {
-line-height: 2.0;
+  line-height: 2.0;
 }
 
 input[type="text"] {
@@ -177,7 +174,7 @@ input[type="text"] {
 }
 
 .add-task button {
-  background-color:lightskyblue;
+  background-color: lightskyblue;
   padding: 0.5rem;
 }
 
