@@ -4,7 +4,7 @@ import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia'
 
-import EditTask from '@/views/EditTask.vue'
+import EditTask from '@/components/EditTask.vue'
 import SelectionBar from '@/components/SelectionBar.vue'
 import AddingTask from '@/components/AddingTask.vue'
 

@@ -4,12 +4,8 @@ import { storeToRefs } from 'pinia'
 import { onMounted, ref, computed } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
-import EditTask from '@/views/EditTask.vue'
-import SelectionBar from '@/components/SelectionBar.vue'
+import AddingTask from '@/components/AddingTask.vue'
 import TaskGroup from '@/components/TaskGroup.vue';
-// import TaskGroupView from '../views/TaskGroupView.vue'; // Adjust the path as necessary
-// import TaskGrouBar from '@/components/TaskGroupBar.vue';
-
 
 const tasksStore = useTasksStore()
 const { tasks } = storeToRefs(tasksStore)
@@ -18,18 +14,6 @@ const taskTitle = ref('')
 
 
 
-
-
-
-//Agregamos una tarea
-// const _addTask = async () => {
-//   if (taskTitle.value.length < 4) {
-//     return;
-//   }
-
-//   await tasksStore.createNewTask(taskTitle.value)
-//   taskTitle.value = ''
-// }
 const newTaskType = ref('');
 
 const taskCreationError = ref(''); // Holds error messages for task creation
@@ -114,7 +98,7 @@ onMounted(async () => {
 
 </section>
 
-
+<AddingTask />
 
 </template>
 
