@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import TaskGroupView from '@/views/TaskGroupView.vue'; // Adjust the path as necessary
 
 import { useUserStore } from '@/stores/userStore'
 
@@ -16,6 +17,12 @@ const router = createRouter({
       name: 'login',
       component: () => import('../views/SignInView.vue')
     },
+    {
+      path: '/tasks/:taskType', // Dynamic segment for task type
+      name: 'taskGroup',
+      component: TaskGroupView
+    },
+
     {
       path: '/about',
       name: 'about',
