@@ -86,19 +86,16 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="logout">
-    <button @click="logOut">Log Out</button>
-  </section>
 
   <section>
     <h1>Hello {{ user.user_metadata.username }} !</h1>
     <h4>Choose your group of tasks</h4>
 
-      <TaskGroup @groupSelected="handleGroupSelected"/>
+    <TaskGroup @groupSelected="handleGroupSelected" />
 
-</section>
+  </section>
 
-<AddingTask />
+  <AddingTask />
 
 </template>
 
@@ -115,10 +112,7 @@ section {
   color: darkslategray;
 }
 
-.logout {
-  display: flex;
-  justify-content: flex-end;
-}
+
 
 button {
   border-radius: 5px;
@@ -126,11 +120,6 @@ button {
   border-color: lightgray;
 }
 
-.logout button {
-  background-color: lightcoral;
-  color: white;
-  font-weight: 600;
-}
 
 
 li input {
@@ -161,6 +150,4 @@ input[type="text"] {
   background-color: lightskyblue;
   padding: 0.5rem;
 }
-
-
 </style>
