@@ -1,21 +1,18 @@
 <script setup>
 import { ref } from 'vue'
 import { useTasksStore } from '@/stores/tasksStore'
+import { useAppStore } from '@/stores/appStore'
 import ConfirmationDialog from '@/components/ConfirmationDialog.vue';
 
-
 const tasksStore = useTasksStore()
+const appStore = useAppStore()
 
 const props = defineProps({
   task: Object
 })
-
 const _isEditing = ref(false)
 const editTask = ref({ ...props.task })
-
-const _deleteTask = async () => {
-  await tasksStore.deleteTask(editTask.value.id)
-}
+const isDialogVisible = ref(false);
 
 const _handleEdit = () => {
   _isEditing.value = true
@@ -41,22 +38,44 @@ const handleUpdateState = async () => {
   }
 }
 
-// POP UP DIALOG WINDOW
-const isDialogVisible = ref(false);
+// DELETION CONFIRMATION
 
-const deleteTask = async (taskId) => {
+const _deleteTask = async () => {
   // Logic to delete the task, possibly communicating with your backend or store
+  try {
+    await tasksStore.deleteTask(editTask.value.id);
+    // Show confirmation message after successful deletion
+    _showConfirmationMessage('Task successfully deleted!', 'success')
+    console.log('tarea eliminada');
+
+  } catch (error) {
+    console.error('Error deleting task:', error);
+    // Optionally, show error in the confirmation message
+    _showConfirmationMessage('Error deleting task.', 'error')
+  }
 };
 
+const _showConfirmationMessage = (message, messageType) => {
+  console.log('_showConfirmationMessage')
+  appStore.showNotification(message, messageType);
+  setTimeout(() => {
+    appStore.hideNotification();
+  }, 3000); // Adjust time as needed
+};
+
+const _openConfirmModal = () => {
+  isDialogVisible.value = true;
+}
+
+// Handle user's confirmation action from ConfirmationDialog
 const confirmDelete = () => {
-  deleteTask(taskId); // Assume taskId is obtained appropriately
   isDialogVisible.value = false;
+  _deleteTask();
 };
 </script>
+
 <template>
   <div class="color-coded" :class="{ green: editTask.is_complete, grey: !editTask.is_complete }">
-
-
 
     <div class="input-group">
       <div class="task-info">
@@ -64,30 +83,23 @@ const confirmDelete = () => {
 
         {{ editTask.title }}
       </div>
-      <!-- {{ editTask.description }} -->
-      <!-- {{ editTask.is_complete ? 'done' : 'pending' }} -->
+
       <div class="task-actions">
-        <button @click="isDialogVisible = true" class="btn-delete"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
+        <button @click="_openConfirmModal" class="btn-delete"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
             size="lg" /></button>
         <button @click="_handleEdit" class="btn-edit"><font-awesome-icon icon="fa-solid fa-pen-to-square"
             size="lg" /></button>
-            <ConfirmationDialog 
-      :isVisible="isDialogVisible" 
-      @confirm="_deleteTask" 
-      @cancel="() => isDialogVisible = false"
-    />
       </div>
     </div>
 
 
-
-
     <div v-show="_isEditing">
       <input type="text" v-model="editTask.title" />
-      <!-- <input type="text" v-model="editTask.description" /> -->
 
       <button class="save" @click="_editTask">Save</button>
     </div>
+
+    <ConfirmationDialog :isVisible="isDialogVisible" @confirm="confirmDelete" @cancel="() => isDialogVisible = false" />
   </div>
 </template>
 

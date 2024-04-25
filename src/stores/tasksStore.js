@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import {
   fetchAllTasks,
@@ -12,6 +12,22 @@ import { useUserStore } from '@/stores/userStore'
 export const useTasksStore = defineStore('tasks', () => {
   // State
   const tasks = ref([])
+
+  // Getters
+  // Group tasks by type without assigning random colors
+  const groupedTasks = computed(() => {
+    const groups = {};
+    const allTasks = tasks.value || [];
+
+    allTasks.forEach(task => {
+        const type = task.task_type || 'Other';
+        if (!groups[type]) {
+            groups[type] = { tasks: [] };
+        }
+        groups[type].tasks.push(task);
+    });
+    return groups;
+  });
 
   // Actions
   async function fetchTasks() {
@@ -57,6 +73,7 @@ async function createNewTask(taskDetails) {
     try {
       await deleteSingleTask(taskId)
       tasks.value = tasks.value.filter((task) => taskId !== task.id)
+      console.log('deleteTask')
     } catch (error) {
       console.error(error)
     }
@@ -79,6 +96,7 @@ async function createNewTask(taskDetails) {
   return {
     // State
     tasks,
+    groupedTasks,
     // Actions
     fetchTasks,
     createNewTask,

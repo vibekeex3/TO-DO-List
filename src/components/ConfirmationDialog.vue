@@ -10,7 +10,7 @@
   const confirmDelete = () => {
     emit('confirm');
   };
-  
+   
   const cancelDelete = () => {
     emit('cancel');
   };
@@ -26,10 +26,10 @@
   </template>
   
   
-  <!-- Add some basic styling -->
+
   <style scoped>
   .confirmation-dialog {
-    /* Basic styling; adjust as necessary */
+
     position: fixed;
     top: 50%;
     left: 50%;
@@ -37,6 +37,6 @@
     background-color: white;
     border: 1px solid #ccc;
     padding: 20px;
-    z-index: 1000; /* Ensure it's above other content */
+    z-index: 100; 
   }
   </style>

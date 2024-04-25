@@ -1,27 +1,11 @@
 <script setup>
-import { computed, ref } from 'vue';
 import { useTasksStore } from '@/stores/tasksStore';
 import { useRouter } from 'vue-router';
 import { storeToRefs } from 'pinia';
 
 const tasksStore = useTasksStore();
-const { tasks } = storeToRefs(tasksStore);
+const { groupedTasks } = storeToRefs(tasksStore);
 const router = useRouter();
-
-// Group tasks by type without assigning random colors
-const groupedTasks = computed(() => {
-    const groups = {};
-    const allTasks = tasks.value || [];
-
-    allTasks.forEach(task => {
-        const type = task.task_type || 'Other';
-        if (!groups[type]) {
-            groups[type] = { tasks: [] };
-        }
-        groups[type].tasks.push(task);
-    });
-    return groups;
-});
 
 // Navigate to the task group details
 const goToTaskGroup = (taskType) => {
