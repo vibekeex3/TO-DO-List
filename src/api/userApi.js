@@ -16,7 +16,6 @@ export const createNewUser = async (username, email, password) => {
   if (error) {
     throw new Error(error.message);
   }
-
   return data.user; 
 }
 
@@ -33,9 +32,6 @@ export const logIn = async (email, password) => {
 
   return user
 }
-
-
-
 
 
 export const logOut = async () => {

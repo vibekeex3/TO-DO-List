@@ -16,26 +16,26 @@ const errorMessage = ref(null)
 
 //registrar un nuevo usuario
 const register = async () => {
-  try {
-    await userStore.validateEmail(registerEmail.value)
-    await userStore.signUp(registerEmail.value, registerPassword.value)
-    router.push({ name: 'tasks' })
-  } catch (error) {
-    console.error(error)
-    window.alert('Error: Insert a valid email.')
-  }
+	try {
+		await userStore.validateEmail(registerEmail.value)
+		await userStore.signUp(registerUsername.value, registerEmail.value, registerPassword.value)
+		router.push({ name: 'home' })
+	} catch (error) {
+		console.error(error)
+		window.alert('Error: Insert a monkey.')
+	}
 }
 
 //Iniciar sesión
 const signIn = async () => {
-  try {
-    await userStore.validateEmail(loginUser.value)
-    await userStore.signIn(loginUser.value, loginPassword.value)
-    router.push({ name: 'home' })
-  } catch (error) {
-    console.error(error)
-    window.alert('Error: Insert a valid email.')
-  }
+	try {
+		await userStore.validateEmail(loginUser.value)
+		await userStore.signIn(loginUser.value, loginPassword.value)
+		router.push({ name: 'home' })
+	} catch (error) {
+		console.error(error)
+		window.alert('Error: Insert a valid email.')
+	}
 }
 
 const _changeSignType = () => {
@@ -43,48 +43,58 @@ const _changeSignType = () => {
 }
 </script>
 <template>
-	<div>
+
+	<section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl w-200 h-100 p-5">
+		<form>
 		<!--inicio de sesión -->
 		<div v-if="signTypeLogin">
-			<h2>Log in</h2>
-			<input v-model="loginUser" type="email" placeholder="Email" required/>
-			<input v-model="loginPassword" type="password" placeholder="Password" required/>
-			<button @click="signIn">Log in</button>
+			<span class="text-4xl font-extrabold">
+				<h1 class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">Welcome back</h1>
+			</span>
 
-			<div class="reg">
-				<p>Don't have an account?</p>
-				<button @click="_changeSignType">Register</button>
+			<input v-model="loginUser" type="email" placeholder="Email" required
+				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+			<input v-model="loginPassword" type="password" placeholder="Password" required
+				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+
+			<button type="button" @click.prevent.stop="signIn"
+				class="bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 hover:from-fuchsia-500 
+			hover:via-pink-500 hover:to-orange-500 text-white text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
+				Log in</button>
+
+			<div>
+				<p class="font-bold text-gray-800">Don't have an account?</p>
+				<button type="button" @click.prevent.stop="_changeSignType"
+					class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
+				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
+					Register</button>
 			</div>
-
 		</div>
+
 		<!--registro de usuario -->
 		<div v-else>
-			<h2>Register</h2>
-			<input v-model="registerUsername" type="username" placeholder="Username" required/>
-			<input v-model="registerEmail" type="email" placeholder="Email" required/>
-			<input v-model="registerPassword" type="password" placeholder="Password" required/>
-			<button @click="register">Register</button>
+			<h2 class="text-3xl font-extrabold text-violet-500">Create an account</h2>
 
-			<div class="log">
-				<p>Already have an account?</p>
-				<button @click="_changeSignType">Log In</button>
+			<input v-model="registerUsername" type="username" placeholder="Username" required
+				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+			<input v-model="registerEmail" type="email" placeholder="Email" required
+				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+			<input v-model="registerPassword" type="password" placeholder="Password" required
+				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+
+			<button type="button" @click.prevent.stop="register"
+				class="bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 hover:from-fuchsia-500 
+			hover:via-pink-500 hover:to-orange-500 text-white text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
+				Register</button>
+
+			<div>
+				<p class="text-sm font-bold text-gray-500">Already have an account?</p>
+				<button type="button" @click.prevent.stop="_changeSignType"
+					class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
+				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
+					Log In</button>
 			</div>
-
-
 		</div>
-
-	</div>
+	</form>
+	</section>
 </template>
-
-<style scoped>
-.reg {
-	background-color: lightgray;
-	margin: 30px 0;
-}
-
-.log {
-	background-color: lightsteelblue;
-	margin: 30px 0;
-}
-
-</style>

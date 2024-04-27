@@ -15,18 +15,17 @@ const goToTaskGroup = (taskType) => {
 
 <template>
     <!-- List of Task Groups -->
-    <div class="group-card" v-for="(group, typeName) in groupedTasks" :key="typeName" @click="goToTaskGroup(typeName)">
+    <div v-for="(group, typeName) in groupedTasks" :key="typeName" @click="goToTaskGroup(typeName)"
+    class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
+				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-2 w-full rounded-lg mx-auto block my-4 cursor-pointer">
         <h3>{{ typeName }}</h3>
-        <p>Tasks in group: {{ group.tasks.length }}</p>
+        <p class="text-xs">tasks: {{ group.tasks.length }}</p>
     </div>
 </template>
 
 <style>
 .group-card {
-    padding: 1rem;
-    background-color: lightpink;
-    /* Adjust or conditionally apply background colors as desired */
-    margin-bottom: 5px;
+ 
     cursor: pointer;
 }
 </style>

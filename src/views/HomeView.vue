@@ -9,10 +9,7 @@ import TaskGroup from '@/components/TaskGroup.vue';
 
 const tasksStore = useTasksStore()
 const { tasks } = storeToRefs(tasksStore)
-// const title = ref('')  NO USADO
 const taskTitle = ref('')
-
-
 
 const newTaskType = ref('');
 
@@ -35,9 +32,6 @@ const _addTask = async () => {
   taskTitle.value = '';
   newTaskType.value = '';
 }
-
-
-
 
 
 const userStore = useUserStore()
@@ -71,12 +65,6 @@ const filteredTasks = computed(() => {
 
 
 
-const handleGroupSelected = (selectedGroup) => {
-  console.log('Selected group:', selectedGroup);
-  // Additional logic to handle the selection...
-};
-
-
 onMounted(async () => {
   await tasksStore.fetchTasks();
 });
@@ -87,41 +75,21 @@ onMounted(async () => {
 
 <template>
 
-  <section>
-    <h1>Hello {{ user.user_metadata.username }} !</h1>
-    <h4>Choose your group of tasks</h4>
+  <section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl w-200 h-100 p-5">
 
-    <TaskGroup @groupSelected="handleGroupSelected" />
+    <h1 class="text-3xl font-extrabold">Hello {{ user.user_metadata.username }} !</h1>
+
+    <AddingTask />
+
+    <TaskGroup />
 
   </section>
-
-  <AddingTask />
 
 </template>
 
 
 
 <style scoped>
-section {
-  margin-top: 1rem;
-}
-
-
-* {
-  background-color: whitesmoke;
-  color: darkslategray;
-}
-
-
-
-button {
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: lightgray;
-}
-
-
-
 li input {
   border-style: none;
 }
