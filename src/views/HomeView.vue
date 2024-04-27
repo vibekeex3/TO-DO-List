@@ -75,6 +75,16 @@ onMounted(async () => {
 
 <template>
 
+	<header class="line-height-relaxed max-h-screen">
+	
+			<nav class="w-full text-sm text-center mt-8">
+				<RouterLink to="/" class="inline-block text-violet-500 py-2 px-4 border-0 hover:bg-violet-500/30">Home</RouterLink>
+				<RouterLink to="/about" class="inline-block text-gray-600 py-2 px-4 border-l border-r border-solid border-gray-300 hover:bg-violet-500/30 hover:font-semibold">About</RouterLink>
+				<button @click="logOut" class=" inline-block  text-gray-600 py-2 px-4 hover:bg-violet-500/30 hover:font-semibold">Log Out</button>
+			</nav>
+
+	</header>
+
   <section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl w-200 h-100 p-5">
 
     <h1 class="text-3xl font-extrabold">Hello {{ user.user_metadata.username }} !</h1>
@@ -88,34 +98,3 @@ onMounted(async () => {
 </template>
 
 
-
-<style scoped>
-li input {
-  border-style: none;
-}
-
-
-.add-task {
-  padding-left: 0.6rem;
-}
-
-
-.add-task h5 {
-  line-height: 2.0;
-}
-
-input[type="text"] {
-  padding: 0.5rem;
-  width: 270px;
-  background-color: whitesmoke;
-  margin: 0 5px 10px 0;
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: lightgrey;
-}
-
-.add-task button {
-  background-color: lightskyblue;
-  padding: 0.5rem;
-}
-</style>

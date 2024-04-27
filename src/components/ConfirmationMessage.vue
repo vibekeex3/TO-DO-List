@@ -9,31 +9,13 @@ defineProps({
 </script>
 
 <template>
-    <div v-if="message !== ''" :class="type">
-        {{ message }}
+    <div v-if="message" class="fixed bottom-5 right-5 text-white py-3 px-5 rounded shadow-md z-50"
+    :class="{
+         'bg-gradient-to-r from-cyan-400 to-green-500': type === 'success',
+         'bg-red-400': type === 'error',
+    }"
+    >
+      <p> {{ message }}</p> 
     </div>
 </template>
 
-<style scoped>
-div {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-
-  color: white;
-  padding: 12px 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  z-index: 100; /* Make sure it is above other content */
-}
-
-.success {
-    background-color: #4CAF50;
-}
-
-.error {
-    background-color: #D8000C;
-}
-
-/* Define additional classes for other 'type' values as needed */
-</style>

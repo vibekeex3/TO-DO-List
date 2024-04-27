@@ -1,13 +1,5 @@
 <template>
-	<header>
-		<div class="wrapper">
-			<nav>
-				<RouterLink to="/">Home</RouterLink>
-				<RouterLink to="/about">About</RouterLink>
-				<button @click="logOut">Log Out</button>
-			</nav>
-		</div>
-	</header>
+
 
 	<RouterView />
 

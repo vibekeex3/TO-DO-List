@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
+import { validateEmail, validatePassword } from '@/api/utils.js'
+
 const router = useRouter()
 const userStore = useUserStore()
 // Variables de referencia
@@ -11,25 +13,25 @@ const loginPassword = ref('')
 const registerUsername = ref('')
 const registerEmail = ref('')
 const registerPassword = ref('')
-const errorMessage = ref(null)
 
 
 //registrar un nuevo usuario
 const register = async () => {
 	try {
-		await userStore.validateEmail(registerEmail.value)
+		await validateEmail(registerEmail.value)
+		await validatePassword(registerPassword.value)
 		await userStore.signUp(registerUsername.value, registerEmail.value, registerPassword.value)
 		router.push({ name: 'home' })
 	} catch (error) {
 		console.error(error)
-		window.alert('Error: Insert a monkey.')
+		window.alert(error)
 	}
 }
 
 //Iniciar sesión
 const signIn = async () => {
 	try {
-		await userStore.validateEmail(loginUser.value)
+		await validateEmail(loginUser.value)
 		await userStore.signIn(loginUser.value, loginPassword.value)
 		router.push({ name: 'home' })
 	} catch (error) {
@@ -49,7 +51,7 @@ const _changeSignType = () => {
 		<!--inicio de sesión -->
 		<div v-if="signTypeLogin">
 			<span class="text-4xl font-extrabold">
-				<h1 class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">Welcome back</h1>
+				<h1 class="bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-violet-500">Welcome back</h1>
 			</span>
 
 			<input v-model="loginUser" type="email" placeholder="Email" required
@@ -63,7 +65,7 @@ const _changeSignType = () => {
 				Log in</button>
 
 			<div>
-				<p class="font-bold text-gray-800">Don't have an account?</p>
+				<p class="font-bold text-gray-600">Don't have an account?</p>
 				<button type="button" @click.prevent.stop="_changeSignType"
 					class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
 				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
@@ -88,7 +90,7 @@ const _changeSignType = () => {
 				Register</button>
 
 			<div>
-				<p class="text-sm font-bold text-gray-500">Already have an account?</p>
+				<p class="text-sm font-bold text-gray-600">Already have an account?</p>
 				<button type="button" @click.prevent.stop="_changeSignType"
 					class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
 				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
