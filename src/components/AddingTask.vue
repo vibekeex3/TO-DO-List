@@ -68,19 +68,19 @@ const _handleTypeSelected = () => {
     <div>
       <label for="title"></label>
       <input v-model="taskTitle" type="text" placeholder="Title (required)" id="title" required
-        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4" />
       <input v-if="showNewTypeInput" v-model="newTaskType" placeholder="Task Group (optional)"
-        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4" />
 
       <select v-model="selectedType" @change="_handleTypeSelected"
-        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4">
+        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4">
         <option disabled value="">Please select one</option>
         <option value="new">Create new type</option>
         <option v-for="(group, typeName) in groupedTasks" :key="typeName" :value="typeName">
           {{ typeName }}
         </option>
       </select>
-      <button type="button" @click="_addTask" class="border border-violet-200  shadow-xl shadow-violet-600 w-64 hover:bg-slate-900/20
+      <button type="button" @click="_addTask" class="border border-violet-200  shadow-xl shadow-violet-600 w-full hover:bg-slate-900/20
 				 text-lg font-bold p-3 rounded-xl mx-auto  my-2 cursor-pointer">
         Add</button>
     </div>

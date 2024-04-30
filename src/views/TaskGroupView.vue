@@ -7,6 +7,7 @@ import { storeToRefs } from 'pinia'
 import TaskBar from '@/components/TaskBar.vue'
 import SelectionBar from '@/components/SelectionBar.vue'
 import AddingTask from '@/components/AddingTask.vue'
+import Header from '@/components/Header.vue'
 
 const route = useRoute();
 const tasksStore = useTasksStore();
@@ -54,12 +55,16 @@ onMounted(() => {
 </script>
 
 <template>
+
+<Header />
+
   <div class="text-center text-gray-600">
     <h2 class="text-3xl font-extrabold py-2"> Your {{ route.params.taskType }} list</h2>
-    <span> You have {{ numTasks }} tasks in this list:</span>
   </div>
 
   <SelectionBar @filter="_handleChangeFilter" />
+
+  <span> You have {{ numTasks }} task/s in this selection:</span>
 
   <section>
     <div>

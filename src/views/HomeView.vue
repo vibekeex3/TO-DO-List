@@ -6,6 +6,8 @@ import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import AddingTask from '@/components/AddingTask.vue'
 import TaskGroup from '@/components/TaskGroup.vue';
+import Header from '@/components/Header.vue'
+
 
 const tasksStore = useTasksStore()
 const { tasks } = storeToRefs(tasksStore)
@@ -75,18 +77,10 @@ onMounted(async () => {
 
 <template>
 
-	<header class="line-height-relaxed max-h-screen">
-	
-			<nav class="w-full text-sm text-center mt-8">
-				<RouterLink to="/" class="inline-block text-violet-500 py-2 px-4 border-0 hover:bg-violet-500/30">Home</RouterLink>
-				<RouterLink to="/about" class="inline-block text-gray-600 py-2 px-4 border-l border-r border-solid border-gray-300 hover:bg-violet-500/30 hover:font-semibold">About</RouterLink>
-				<button @click="logOut" class=" inline-block  text-gray-600 py-2 px-4 hover:bg-violet-500/30 hover:font-semibold">Log Out</button>
-			</nav>
+  <section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl h-100 p-5
+  w-200 sm:w-750 md:1000">
 
-	</header>
-
-  <section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl w-200 h-100 p-5">
-
+    <Header />
     <h1 class="text-3xl font-extrabold">Hello {{ user.user_metadata.username }} !</h1>
 
     <AddingTask />
@@ -96,5 +90,3 @@ onMounted(async () => {
   </section>
 
 </template>
-
-
