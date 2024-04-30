@@ -4,9 +4,10 @@ import { onMounted, ref, computed } from 'vue'
 import { useRoute } from 'vue-router';
 import { storeToRefs } from 'pinia'
 
-import EditTask from '@/components/EditTask.vue'
+import TaskBar from '@/components/TaskBar.vue'
 import SelectionBar from '@/components/SelectionBar.vue'
 import AddingTask from '@/components/AddingTask.vue'
+import Header from '@/components/Header.vue'
 
 const route = useRoute();
 const tasksStore = useTasksStore();
@@ -54,18 +55,22 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h2> Your {{ route.params.taskType }} list</h2>
-    <span> You have {{ numTasks }} tasks in this list:</span>
+
+<Header />
+
+  <div class="text-center text-gray-600">
+    <h2 class="text-3xl font-extrabold py-2"> Your {{ route.params.taskType }} list</h2>
   </div>
 
   <SelectionBar @filter="_handleChangeFilter" />
 
+  <span> You have {{ numTasks }} task/s in this selection:</span>
+
   <section>
-    <div class="container-list">
+    <div>
       <ul v-if="filteredTasks">
         <li v-for="task in filteredTasks" :key="task.id">
-          <EditTask :task="task" />
+          <TaskBar :task="task" />
         </li>
       </ul>
     </div>
@@ -74,17 +79,3 @@ onMounted(() => {
   <AddingTask />
 
 </template>
-
-
-<style scoped>
-ul {
-  margin-left: 0;
-  padding-left: 0;
-
-}
-
-li {
-  margin: 0;
-  list-style-type: none;
-}
-</style>

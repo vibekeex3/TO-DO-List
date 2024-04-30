@@ -6,13 +6,12 @@ import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import AddingTask from '@/components/AddingTask.vue'
 import TaskGroup from '@/components/TaskGroup.vue';
+import Header from '@/components/Header.vue'
+
 
 const tasksStore = useTasksStore()
 const { tasks } = storeToRefs(tasksStore)
-// const title = ref('')  NO USADO
 const taskTitle = ref('')
-
-
 
 const newTaskType = ref('');
 
@@ -35,9 +34,6 @@ const _addTask = async () => {
   taskTitle.value = '';
   newTaskType.value = '';
 }
-
-
-
 
 
 const userStore = useUserStore()
@@ -71,12 +67,6 @@ const filteredTasks = computed(() => {
 
 
 
-const handleGroupSelected = (selectedGroup) => {
-  console.log('Selected group:', selectedGroup);
-  // Additional logic to handle the selection...
-};
-
-
 onMounted(async () => {
   await tasksStore.fetchTasks();
 });
@@ -87,67 +77,16 @@ onMounted(async () => {
 
 <template>
 
-  <section>
-    <h1>Hello {{ user.user_metadata.username }} !</h1>
-    <h4>Choose your group of tasks</h4>
+  <section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl h-100 p-5
+  w-200 sm:w-750 md:1000">
 
-    <TaskGroup @groupSelected="handleGroupSelected" />
+    <Header />
+    <h1 class="text-3xl font-extrabold">Hello {{ user.user_metadata.username }} !</h1>
+
+    <AddingTask />
+
+    <TaskGroup />
 
   </section>
 
-  <AddingTask />
-
 </template>
-
-
-
-<style scoped>
-section {
-  margin-top: 1rem;
-}
-
-
-* {
-  background-color: whitesmoke;
-  color: darkslategray;
-}
-
-
-
-button {
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: lightgray;
-}
-
-
-
-li input {
-  border-style: none;
-}
-
-
-.add-task {
-  padding-left: 0.6rem;
-}
-
-
-.add-task h5 {
-  line-height: 2.0;
-}
-
-input[type="text"] {
-  padding: 0.5rem;
-  width: 270px;
-  background-color: whitesmoke;
-  margin: 0 5px 10px 0;
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: lightgrey;
-}
-
-.add-task button {
-  background-color: lightskyblue;
-  padding: 0.5rem;
-}
-</style>

@@ -41,7 +41,7 @@ const _addTask = async () => {
     // Hide the confirmation message after 3 seconds
     setTimeout(() => {
       appStore.hideNotification()
-    }, 3000); 
+    }, 3000);
 
   } catch (error) {
     console.error(error);
@@ -61,40 +61,31 @@ const _handleTypeSelected = () => {
 
 <template>
 
-  <section class="add-task">
-    <h5>Add a new task (minimum 3 characters)</h5>
+  <section
+    class="text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 text-white p-5 rounded-xl my-4 mx-auto">
+    <h3 class="text-xl font-extrabold">Add a new task</h3>
+    <p class="text-xs">(minimum 3 characters)</p>
     <div>
       <label for="title"></label>
-      <input v-model="taskTitle" type="text" placeholder="Title" id="title" />
-      <input v-if="showNewTypeInput" v-model="newTaskType" placeholder="Task Group (Optional)">
-      <select v-model="selectedType" @change="_handleTypeSelected">
+      <input v-model="taskTitle" type="text" placeholder="Title (required)" id="title" required
+        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4" />
+      <input v-if="showNewTypeInput" v-model="newTaskType" placeholder="Task Group (optional)"
+        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4" />
+
+      <select v-model="selectedType" @change="_handleTypeSelected"
+        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4">
         <option disabled value="">Please select one</option>
         <option value="new">Create new type</option>
         <option v-for="(group, typeName) in groupedTasks" :key="typeName" :value="typeName">
           {{ typeName }}
         </option>
       </select>
-      <button @click="_addTask" class="btn-add">Add</button>
+      <button type="button" @click="_addTask" class="border border-violet-200  shadow-xl shadow-violet-600 w-full hover:bg-slate-900/20
+				 text-lg font-bold p-3 rounded-xl mx-auto  my-2 cursor-pointer">
+        Add</button>
     </div>
   </section>
 
 
 </template>
 
-<style scoped>
-.add-task {
-  margin-top: 200px;
-  padding: 2rem 0;
-  text-align: center;
-  background-color: lightgreen;
-}
-
-.error {
-  color: #D8000C;
-  background-color: #FFD2D2;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-}
-
-</style>

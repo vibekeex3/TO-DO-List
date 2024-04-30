@@ -1,12 +1,3 @@
-<template>
-    <div class="selection-bar">
-        <button @click="emitFilter('all')" class="all-tasks">All Tasks</button>
-        <!-- This button is for selecting all tasks -->
-        <button @click="emitFilter('completed')" class="completed-tasks">Completed Tasks</button>
-        <button @click="emitFilter('pending')" class="pending-tasks">Pending Tasks</button>
-    </div>
-</template>
-
 <script setup>
 import { defineEmits } from 'vue'
 
@@ -19,26 +10,21 @@ const emitFilter = (filter) => {
 };
 </script>
 
-<style scoped>
-.selection-bar {
-    display: flex;
-    justify-content: space-around;
-    padding: 5px 0 5px 0;
-}
 
-button {
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 5px;
-    padding: 0.3rem;
-}
-
-button.completed-tasks {
-    background-color: lightgreen;
-    color: darkgreen;
-}
-
-button.pending-tasks {
-    background-color: lightgrey;
-}
-</style>
+<template>
+    <div class="flex justify-between">
+        <button @click="emitFilter('all')" 
+        class="border-purple-200 border shadow shadow-violet-500/50 text-violet-600 hover:text-white 
+				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 font-bold p-2 w-24 rounded-lg my-4 cursor-pointer">
+                All Tasks</button>
+        <!-- This button is for selecting all tasks -->
+        <button @click="emitFilter('completed')" 
+        class="border-purple-200 border shadow shadow-violet-500/50 text-violet-600 hover:text-white 
+				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 font-bold p-2 w-24 rounded-lg my-4 cursor-pointer">
+        Completed</button>
+        <button @click="emitFilter('pending')"
+        class="border-purple-200 border shadow shadow-violet-500/50 text-violet-600 hover:text-white 
+				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 font-bold p-2 w-24 rounded-lg my-4 cursor-pointer">
+            Pending</button>
+    </div>
+</template>

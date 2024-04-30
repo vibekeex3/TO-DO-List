@@ -14,7 +14,7 @@ export const useTasksStore = defineStore('tasks', () => {
   const tasks = ref([])
 
   // Getters
-  // Group tasks by type without assigning random colors
+  // Group tasks by type 
   const groupedTasks = computed(() => {
     const groups = {};
     const allTasks = tasks.value || [];
@@ -40,20 +40,9 @@ export const useTasksStore = defineStore('tasks', () => {
     }
   }
 
-  // async function createNewTask(task) {
-  //   const userStore = useUserStore()
-  //   try {
-  //     const newTask = await createTask({
-  //       title: task,
-  //       user_id: userStore.user.id
-  //     })
-  //     tasks.value.push(newTask)
-  //   } catch (error) {
-  //     console.error(error)
-  //   }
-  // }
 
-//new add
+
+//new task add
 async function createNewTask(taskDetails) {
   const userStore = useUserStore();
   try {
