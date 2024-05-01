@@ -17,17 +17,18 @@ const hasGroups = computed(() => {
 });
 </script>
 
-<template>
-   <p v-if="hasGroups" class="text-gray-600 font-bold">Or choose a list of tasks:</p>
+<template> 
+  <section class="sm:border sm:border-purple-200 sm:rounded-xl p-4 sm:mx-4">
+   <h3 v-if="hasGroups" class="text-gray-600 text-xl font-extrabold mb-6">Or choose your list:</h3>
 
     <!-- List of Task Groups -->
     <div v-for="(group, typeName) in groupedTasks" :key="typeName" @click="goToTaskGroup(typeName)"
     class="border-purple-200 border shadow shadow-violet-500/50 text-gray-600 hover:text-white 
-				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-2 w-full rounded-lg mx-auto block my-3 cursor-pointer">
+				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500  p-2 w-full rounded-lg mx-auto block my-3 cursor-pointer">
         
-        <h3>{{ typeName }}</h3>
+        <h4 class="text-lg font-bold">{{ typeName }}</h4>
         <p class="text-xs">{{ group.tasks.length }} task/s</p>
     </div>
-
+  </section>
 </template>
 

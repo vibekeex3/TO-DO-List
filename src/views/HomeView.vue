@@ -77,15 +77,23 @@ onMounted(async () => {
 
 <template>
 
-  <section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl h-100 p-5
-  w-200 sm:w-750 md:1000">
+  <section class="text-center w-full h-screen p-0 block
+   sm:w-600 sm:h-full sm:shadow-lg sm:shadow-indigo-500/50
+   lg:w-800">
 
     <Header />
-    <h1 class="text-3xl font-extrabold">Hello {{ user.user_metadata.username }} !</h1>
+    <h1 class="text-3xl font-extrabold text-gray-600 my-5 sm:my-10 sm:text-5xl">Hello {{ user.user_metadata.username }} !</h1>
 
+<article class="sm: grid sm:gap-2 sm:grid-cols-2">
+    <div>
     <AddingTask />
+  </div>
 
+  <div>
     <TaskGroup />
+  </div>
+</article>
+
 
   </section>
 

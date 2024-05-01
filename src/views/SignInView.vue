@@ -45,13 +45,14 @@ const _changeSignType = () => {
 }
 </script>
 <template>
-	<article class="flex">
+	<article class="flex items-center justify-center">
 	<section>
-    <img src="../assets/images/signin-image.jpg" alt="A woman with origami" class="hidden md:inline-block"/>
+    <img src="../assets/images/signin-image.jpg" alt="A woman with origami" class="hidden lg:inline-block"/>
 </section>
-	<section class="text-center shadow-lg shadow-indigo-500/50 rounded-xl w-200 h-100 p-5 pt-7
-	sm:w-750
-	md:m-28 m:h-100">
+
+	<section class="text-center w-full h-screen p-0 mt-20
+	sm:w-200 sm:p-5 sm:pt-7 sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50 sm:h-100 sm:mt-0
+	md:m-28 md:h-100">
 		<form>
 		<!--inicio de sesión -->
 		<div v-if="signTypeLogin">

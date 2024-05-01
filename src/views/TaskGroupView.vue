@@ -56,26 +56,33 @@ onMounted(() => {
 
 <template>
 
-<Header />
+  <section class="text-center w-full h-screen p-0 block
+   sm:w-600 sm:shadow-lg sm:shadow-indigo-500/50
+   lg:w-800">
+    <Header />
 
-  <div class="text-center text-gray-600">
-    <h2 class="text-3xl font-extrabold py-2"> Your {{ route.params.taskType }} list</h2>
-  </div>
+    <h2 class="text-3xl text-center text-gray-600 font-extrabold my-5 sm:my-10 sm:text-5xl"> Your {{
+      route.params.taskType }} list</h2>
 
-  <SelectionBar @filter="_handleChangeFilter" />
 
-  <span> You have {{ numTasks }} task/s in this selection:</span>
+    <article class="sm:grid sm:gap-2 sm:grid-cols-2">
+      <div class="mx-4 my-6 sm:my-0 sm:order-last sm:border sm:border-purple-200 sm:rounded-xl p-4 sm:mx-4">
+        <SelectionBar @filter="_handleChangeFilter" />
 
-  <section>
-    <div>
-      <ul v-if="filteredTasks">
-        <li v-for="task in filteredTasks" :key="task.id">
-          <TaskBar :task="task" />
-        </li>
-      </ul>
-    </div>
+        <p class="py-4 text-sm text-gray-600">You have {{ numTasks }} task/s in this selection:</p>
+
+        <ul v-if="filteredTasks">
+          <li v-for="task in filteredTasks" :key="task.id">
+            <TaskBar :task="task" />
+          </li>
+        </ul>
+      </div>
+
+
+      <div>
+        <AddingTask />
+      </div>
+
+    </article>
   </section>
-
-  <AddingTask />
-
 </template>

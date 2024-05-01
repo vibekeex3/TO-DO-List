@@ -84,16 +84,16 @@ const confirmDelete = () => {
 
     <div class="flex justify-between">
 
-      <div class="task-info flex items-center">
+      <div class="flex items-center">
         <input type="checkbox" @change="handleUpdateState" v-model="editTask.is_complete" class="mr-2"/>
        <p>{{ editTask.title }}</p> 
       </div>
 
 
       <div>
-        <button @click="_openConfirmModal" class="mx-1"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
-            size="lg" /></button>
         <button @click="_handleEdit" class="mx-1"><font-awesome-icon icon="fa-solid fa-pen-to-square"
+            size="lg" /></button>
+        <button @click="_openConfirmModal" class="mx-1"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
             size="lg" /></button>
       </div>
 
@@ -113,19 +113,3 @@ const confirmDelete = () => {
   <ConfirmationDialog :isVisible="isDialogVisible" @confirm="confirmDelete" @cancel="() => isDialogVisible = false" />
 
 </template>
-
-<style scoped>
-
-
-
-
-.input-group {
-  align-items: center;
-  
-}
-
-
-
-
-
-</style>

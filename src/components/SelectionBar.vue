@@ -12,19 +12,19 @@ const emitFilter = (filter) => {
 
 
 <template>
-    <div class="flex justify-between">
+    <div class="flex justify-center">
         <button @click="emitFilter('all')" 
-        class="border-purple-200 border shadow shadow-violet-500/50 text-violet-600 hover:text-white 
-				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 font-bold p-2 w-24 rounded-lg my-4 cursor-pointer">
+        class="shadow shadow-violet-500/50 text-violet-600 hover:text-white 
+				 hover:bg-fuchsia-500 font-bold p-2 w-26 rounded-lg mx-4 cursor-pointer">
                 All Tasks</button>
         <!-- This button is for selecting all tasks -->
         <button @click="emitFilter('completed')" 
-        class="border-purple-200 border shadow shadow-violet-500/50 text-violet-600 hover:text-white 
-				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 font-bold p-2 w-24 rounded-lg my-4 cursor-pointer">
+        class=" shadow shadow-violet-500/50 text-violet-600 hover:text-white 
+				hover:bg-fuchsia-500 font-bold p-2 w-26 rounded-lg mx-4 cursor-pointer">
         Completed</button>
         <button @click="emitFilter('pending')"
-        class="border-purple-200 border shadow shadow-violet-500/50 text-violet-600 hover:text-white 
-				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 font-bold p-2 w-24 rounded-lg my-4 cursor-pointer">
+        class=" shadow shadow-violet-500/50 text-violet-600 hover:text-white 
+				hover:bg-fuchsia-500 font-bold p-2 w-26 rounded-lg mx-4 cursor-pointer">
             Pending</button>
     </div>
 </template>

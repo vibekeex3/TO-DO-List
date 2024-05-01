@@ -62,7 +62,7 @@ const _handleTypeSelected = () => {
 <template>
 
   <section
-    class="text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 text-white p-5 rounded-xl my-4 mx-auto">
+    class="text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 text-white p-5 rounded-xl my-4 sm:my-0 mx-4 shadow-lg shadow-indigo-500/50">
     <h3 class="text-xl font-extrabold">Add a new task</h3>
     <p class="text-xs">(minimum 3 characters)</p>
     <div>
@@ -74,8 +74,8 @@ const _handleTypeSelected = () => {
 
       <select v-model="selectedType" @change="_handleTypeSelected"
         class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4">
-        <option disabled value="">Please select one</option>
-        <option value="new">Create new type</option>
+        <option disabled value="">Please select a list</option>
+        <option value="new">Create new list</option>
         <option v-for="(group, typeName) in groupedTasks" :key="typeName" :value="typeName">
           {{ typeName }}
         </option>
