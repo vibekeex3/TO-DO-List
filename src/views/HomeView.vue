@@ -77,7 +77,7 @@ onMounted(async () => {
 
 <template>
 
-  <section class="text-center w-full h-screen p-0 block
+  <section class="text-center w-full h-screen p-0 block mt-24
    sm:w-600 sm:h-full sm:shadow-lg sm:shadow-indigo-500/50
    lg:w-800">
 
