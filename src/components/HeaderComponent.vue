@@ -46,17 +46,17 @@ const logOut = async () => {
             </div>
             <!-- menú mobile -->
             <div v-if="isMenuOpen"
-                class="sm:hidden rounded-md shadow-md absolute top-12 right-0 text-right bg-white text-gray-600 ">
-                <ul>
+                class="sm:hidden rounded-md shadow-md shadow-violet-500 absolute top-16 right-0 text-right bg-white text-gray-600 ">
+                <ul class="divide-y divide-solid">
                     <li
-                        class="py-2 px-8 border-b border-solid border-gray-300 duration-500 hover:bg-violet-500/30 hover:font-semibold">
+                        class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
                         <RouterLink to="/">Home</RouterLink>
                     </li>
                     <li
-                        class="py-2 px-8  border-b border-solid border-gray-300 duration-500 hover:bg-violet-500/30 hover:font-semibold">
+                        class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
                         <RouterLink to="/about">About</RouterLink>
                     </li>
-                    <li class="py-2 px-8  duration-500 hover:bg-violet-500/30 hover:font-semibold">
+                    <li class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
                         <button @click="logOut">Log Out</button>
                     </li>
                 </ul>
