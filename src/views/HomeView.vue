@@ -6,7 +6,7 @@ import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 import AddingTask from '@/components/AddingTask.vue'
 import TaskGroup from '@/components/TaskGroup.vue';
-import Header from '@/components/Header.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
 
 
 const tasksStore = useTasksStore()
@@ -70,18 +70,14 @@ const filteredTasks = computed(() => {
 onMounted(async () => {
   await tasksStore.fetchTasks();
 });
-// onMounted(() => {
-//   tasksStore.fetchTasks()
-// })
+
 </script>
 
 <template>
-
+ <HeaderComponentr />
   <section class="text-center w-full h-screen p-0 block mt-24
    sm:w-600 sm:h-full sm:shadow-lg sm:shadow-indigo-500/50
    lg:w-800">
-
-    <Header />
     <h1 class="text-3xl font-extrabold text-gray-600 my-5 sm:my-10 sm:text-5xl">Hello {{ user.user_metadata.username }} !</h1>
 
 <article class="sm: grid sm:gap-2 sm:grid-cols-2">

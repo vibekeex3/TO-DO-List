@@ -7,7 +7,7 @@ import { storeToRefs } from 'pinia'
 import TaskBar from '@/components/TaskBar.vue'
 import SelectionBar from '@/components/SelectionBar.vue'
 import AddingTask from '@/components/AddingTask.vue'
-import Header from '@/components/Header.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
 
 const route = useRoute();
 const tasksStore = useTasksStore();
@@ -55,11 +55,11 @@ onMounted(() => {
 </script>
 
 <template>
-
+    <HeaderComponent />
   <section class="text-center w-full h-screen p-0 block mt-24
    sm:w-600 sm:shadow-lg sm:shadow-indigo-500/50
    lg:w-800">
-    <Header />
+
 
     <h2 class="text-3xl text-center text-gray-600 font-extrabold my-5 sm:my-10 sm:text-5xl"> Your {{
       route.params.taskType }} list</h2>
