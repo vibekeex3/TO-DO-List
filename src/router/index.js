@@ -15,7 +15,7 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: () => import('../views/SignInView.vue')
+      component: () => import('@/views/SignInView.vue')
     },
     {
       path: '/tasks/:taskType', // Dynamic segment for task type
