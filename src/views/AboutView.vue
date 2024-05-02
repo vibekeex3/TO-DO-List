@@ -25,15 +25,16 @@ const logOut = async () => {
 
 <template>
 <HeaderComponent />
-  <section class="text-center w-full h-screen p-0 block mt-24
-   sm:w-200 sm:200 sm:shadow-lg sm:shadow-indigo-500/50">
+  <section class="text-center w-full sm:w-96 h-screen sm:h-[540px] p-6 block mx-auto mt-24
+  sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50">
 
 	<h1 class="text-3xl font-extrabold text-gray-600 my-5 sm:my-10 sm:text-5xl">User profile</h1>
-    <p v-if="user" class="text-xl text-gray-600 my-5 ">Username: {{ user.user_metadata.username }}</p>
-    <p v-if="user" class="text-xl text-gray-600 my-5 ">email: {{ user.email }}</p>
-    <p v-if="user" class="text-xl text-gray-600 my-5 ">member since: {{ user.email_confirmed_at }}</p>
-    <p v-if="user" class="text-xl text-gray-600 my-5 ">last logged in: {{ user.last_sign_in_at }}</p>
-
+  <div class="text-left">
+    <p v-if="user" class="text-xl text-gray-600 my-5 p-2 rounded-lg border border-violet-500 bg-violet-100"><span class="font-semibold">Username:</span> {{ user.user_metadata.username }}</p>
+    <p v-if="user" class="text-xl text-gray-600 my-5 p-2 rounded-lg border border-violet-500 bg-violet-100">email: {{ user.email }}</p>
+    <p v-if="user" class="text-xl text-gray-600 my-5 p-2 rounded-lg border border-violet-500 bg-violet-100">member since: {{ user.email_confirmed_at }}</p>
+    <p v-if="user" class="text-xl text-gray-600 my-5 p-2 rounded-lg border border-violet-500 bg-violet-100">last logged in: {{ user.last_sign_in_at }}</p>
+  </div>
   </section>
 
 </template>
