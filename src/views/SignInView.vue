@@ -50,9 +50,12 @@ const _changeSignType = () => {
     <img src="../assets/images/signin-image.jpg" alt="A woman with origami" class="hidden lg:inline-block"/>
 </section>
 
-	<section class="text-center w-full h-screen p-0 mt-20
-	sm:w-200 sm:p-5 sm:pt-7 sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50 sm:h-100 sm:mt-0
+	<section class="text-center w-full h-screen p-0 mt-20 
+	sm:w-200 sm:p-5 sm:pt-2 sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50 sm:h-100 sm:mt-0
 	md:m-28 md:h-100">
+
+	<img src="../assets/images/origamee-slogan.svg" alt="logo origamee, your little tool to conquer the world" class="max-w-80  mx-auto"/>
+
 		<form>
 		<!--inicio de sesión -->
 		<div v-if="signTypeLogin">
