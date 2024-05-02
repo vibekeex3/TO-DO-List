@@ -45,14 +45,14 @@ const _changeSignType = () => {
 }
 </script>
 <template>
-	<article class="flex items-center justify-center">
+	<article class="flex items-center">
 	<section>
-    <img src="../assets/images/signin-image.jpg" alt="A woman with origami" class="hidden lg:inline-block"/>
+    <img src="../assets/images/signin-image.png" alt="A woman with origami" class="hidden lg:object-cover lg:w-full lg:inline-block lg:flex-2"/>
 </section>
 
 	<section class="text-center w-full h-screen p-0 mt-20 
-	sm:w-200 sm:p-5 sm:pt-2 sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50 sm:h-100 sm:mt-0
-	md:m-28 md:h-100">
+	sm:h-[640px] sm:p-5 sm:pt-2 sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50  sm:mt-0
+	md:m-28 lg:flex-1">
 
 	<img src="../assets/images/origamee-slogan.svg" alt="logo origamee, your little tool to conquer the world" class="max-w-80  mx-auto"/>
 

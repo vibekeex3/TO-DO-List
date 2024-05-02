@@ -16,7 +16,7 @@
   
 
 <template>
-    <div v-if="isVisible" class=" bg-white p-6 w-4/5 sm:w-1/4 md:w-1/4 text-center  text-gray-600 rounded-xl shadow-2xl border shadow-violet-500 border-violet-200 fixed -translate-x-1/2 -translate-y-1/2 z-50">
+    <div v-if="isVisible" class=" bg-white p-6 h-36 w-11/12 sm:w-96 md:w-96 text-center  text-gray-600 rounded-xl shadow-2xl border shadow-violet-500 border-violet-200 fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
       <p class="font-bold">Do you <em>really</em> want to delete this task?</p>
       <div class="flex justify-around">
       <button @click="confirmDelete" class="text-sm shadow shadow-violet-500
