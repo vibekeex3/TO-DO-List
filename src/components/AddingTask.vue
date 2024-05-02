@@ -63,17 +63,17 @@ const _handleTypeSelected = () => {
 
   <section
     class="text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 text-white p-5 rounded-xl my-4 sm:my-0 mx-4 shadow-lg shadow-indigo-500/50">
-    <h3 class="text-xl font-extrabold">Add a new task</h3>
-    <p class="text-xs">(minimum 3 characters)</p>
+    <h2 class="text-2xl font-extrabold">Add a new task</h2>
+    <p class="text-sm">(minimum 3 characters)</p>
     <div>
       <label for="title"></label>
-      <input v-model="taskTitle" type="text" placeholder="Title (required)" id="title" required
+      <input v-model="taskTitle" type="text" placeholder="Title of your task (required)" id="title" required
         class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4" />
-      <input v-if="showNewTypeInput" v-model="newTaskType" placeholder="Task Group (optional)"
-        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4" />
+      <input v-if="showNewTypeInput" v-model="newTaskType" placeholder="Name your list (optional)"
+        class="bg-transparent font-semibold border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4" />
 
       <select v-model="selectedType" @change="_handleTypeSelected"
-        class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4">
+        class="bg-white/20 border border-indigo-300 hover:border-fuchsia-300 p-2 w-full rounded-lg mx-auto block my-4">
         <option disabled value="">Please select a list</option>
         <option value="new">Create new list</option>
         <option v-for="(group, typeName) in groupedTasks" :key="typeName" :value="typeName">

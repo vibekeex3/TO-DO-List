@@ -91,9 +91,9 @@ const confirmDelete = () => {
 
 
       <div>
-        <button @click="_handleEdit" class="mx-1"><font-awesome-icon icon="fa-solid fa-pen-to-square"
+        <button @click="_handleEdit" class="mx-2"><font-awesome-icon icon="fa-solid fa-pen-to-square"
             size="lg" /></button>
-        <button @click="_openConfirmModal" class="mx-1"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
+        <button @click="_openConfirmModal" class="mx-2"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
             size="lg" /></button>
       </div>
 
