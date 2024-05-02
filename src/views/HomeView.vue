@@ -65,8 +65,6 @@ const filteredTasks = computed(() => {
   }
 });
 
-
-
 onMounted(async () => {
   await tasksStore.fetchTasks();
 });
@@ -76,7 +74,7 @@ onMounted(async () => {
 <template>
  <HeaderComponent />
   <section class="text-center w-full h-screen p-0 block mt-24
-   sm:w-600 sm:h-full sm:shadow-lg sm:shadow-indigo-500/50
+   sm:w-600 sm:shadow-lg sm:shadow-indigo-500/50 sm:rounded-xl
    lg:w-800">
     <h1 class="text-3xl font-extrabold text-gray-600 my-5 sm:my-10 sm:text-5xl">Hello {{ user ? user.user_metadata.username : ''}} !</h1>
 

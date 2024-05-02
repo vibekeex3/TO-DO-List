@@ -56,13 +56,16 @@ onMounted(() => {
 
 <template>
     <HeaderComponent />
-  <section class="text-center w-full h-screen p-0 block mt-24
+  <section class="text-center w-full h-screen p-0 block mt-24 relative
    sm:w-600 sm:shadow-lg sm:shadow-indigo-500/50
    lg:w-800">
 
+   <RouterLink to="/"
+                    class="inline-block absolute left-4 top-12 text-lg text-violet-500 border border-violet-500 rounded-lg py-2 px-4  hover:bg-violet-500 hover:text-white"> < Back
+                </RouterLink>
 
-    <h2 class="text-3xl text-center text-gray-600 font-extrabold my-5 sm:my-10 sm:text-5xl"> Your {{
-      route.params.taskType }} list</h2>
+    <h2 class="inline-block text-3xl text-center text-gray-600 font-extrabold my-5 sm:my-10 sm:text-5xl"> Your <span class="text-violet-500"> {{
+      route.params.taskType }} </span> list</h2>
 
 
     <article class="sm:grid sm:gap-2 sm:grid-cols-2">

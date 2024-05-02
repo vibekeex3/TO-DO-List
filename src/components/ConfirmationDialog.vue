@@ -1,6 +1,4 @@
 <script setup>
-  import { ref, defineProps, defineEmits } from 'vue';
-  
   const props = defineProps({
     isVisible: Boolean
   });
@@ -18,15 +16,15 @@
   
 
 <template>
-    <div v-if="isVisible" class="confirmation-dialog bg-white p-4 w-4/5 text-center  text-gray-600 rounded-xl shadow-2xl border shadow-violet-500 border-violet-200">
-      <p class="font-bold">Are you sure you want to delete this task?</p>
+    <div v-if="isVisible" class=" bg-white p-6 w-4/5 sm:w-1/4 md:w-1/4 text-center  text-gray-600 rounded-xl shadow-2xl border shadow-violet-500 border-violet-200 fixed -translate-x-1/2 -translate-y-1/2 z-50">
+      <p class="font-bold">Do you <em>really</em> want to delete this task?</p>
       <div class="flex justify-around">
-      <button @click="confirmDelete" class="text-xs shadow shadow-violet-500
-				 hover:bg-violet-200  p-1 w-2/5 rounded-md my-4 cursor-pointer">
+      <button @click="confirmDelete" class="text-sm shadow shadow-violet-500
+				 hover:bg-violet-500 hover:text-white  p-1 w-2/5 rounded-md my-4 cursor-pointer">
 
       Yes, delete</button>
-      <button @click="cancelDelete" class="text-xs shadow shadow-violet-500
-				 hover:bg-violet-200  p-1 w-2/5 rounded-md my-4 cursor-pointer">No, go back</button>
+      <button @click="cancelDelete" class="text-sm shadow shadow-violet-500 bg-violet-100
+				 hover:bg-violet-500 hover:text-white p-2 w-2/5 rounded-md my-4 cursor-pointer">No, go back</button>
         </div>
     </div>
   </template>

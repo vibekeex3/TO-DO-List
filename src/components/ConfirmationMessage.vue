@@ -1,6 +1,4 @@
 <script setup>
-import { defineProps } from 'vue';
-
 // Accepts 'message' and 'type' as props. 
 defineProps({
     message: String,

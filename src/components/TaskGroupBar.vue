@@ -4,19 +4,10 @@ import { storeToRefs } from 'pinia'
 import { onMounted, ref, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router';
 
-
-
-
 const router = useRouter();
 const route = useRoute();
 const { tasks } = useTasksStore();
-
-
-
-import { defineEmits } from 'vue'
 const emit = defineEmits(['selectGroup']);
-
-
 
 const handleGroupSelection = (selectedType) => {
   filter.value = selectedType; // Assume you have a filter reactive property
@@ -36,9 +27,6 @@ const tasksToDisplay = computed(() => {
   }
   return groupedTasks.value[selectedGroup.value] || [];
 });
-
-
-
 
 // PUT TASKS IN GROUPS
 // Alias tasks from storeToRefs to avoid conflict
