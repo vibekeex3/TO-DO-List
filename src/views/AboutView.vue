@@ -29,10 +29,10 @@ const logOut = async () => {
    sm:w-200 sm:200 sm:shadow-lg sm:shadow-indigo-500/50">
 
 	<h1 class="text-3xl font-extrabold text-gray-600 my-5 sm:my-10 sm:text-5xl">User profile</h1>
-    <p class="text-xl text-gray-600 my-5 ">Username: {{ user.user_metadata.username }}</p>
-    <p class="text-xl text-gray-600 my-5 ">email: {{ user.email }}</p>
-    <p class="text-xl text-gray-600 my-5 ">member since: {{ user.email_confirmed_at }}</p>
-    <p class="text-xl text-gray-600 my-5 ">last logged in: {{ user.last_sign_in_at }}</p>
+    <p v-if="user" class="text-xl text-gray-600 my-5 ">Username: {{ user.user_metadata.username }}</p>
+    <p v-if="user" class="text-xl text-gray-600 my-5 ">email: {{ user.email }}</p>
+    <p v-if="user" class="text-xl text-gray-600 my-5 ">member since: {{ user.email_confirmed_at }}</p>
+    <p v-if="user" class="text-xl text-gray-600 my-5 ">last logged in: {{ user.last_sign_in_at }}</p>
 
   </section>
 
