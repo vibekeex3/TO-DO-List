@@ -30,9 +30,9 @@ const logOut = async () => {
                 <RouterLink to="/"
                     class="inline-block text-gray-600 duration-500 py-2 px-4 border-0 hover:bg-violet-500/30">Home
                 </RouterLink>
-                <RouterLink to="/about"
+                <RouterLink to="/user"
                     class="inline-block text-gray-600 duration-500 py-2 px-4 border-l border-r border-solid border-gray-300 hover:bg-violet-500/30 hover:font-semibold">
-                    About</RouterLink>
+                    User</RouterLink>
                 <button @click="logOut"
                     class=" inline-block  text-gray-600 duration-500 py-2 px-4 hover:bg-violet-500/30 hover:font-semibold">Log
                     Out</button>
@@ -48,23 +48,17 @@ const logOut = async () => {
             <div v-if="isMenuOpen"
                 class="sm:hidden rounded-md shadow-md shadow-violet-500 absolute top-16 right-0 text-right bg-white text-gray-600 ">
                 <ul class="divide-y divide-solid">
-                    <li
-                        class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
+                    <li class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
                         <RouterLink to="/">Home</RouterLink>
                     </li>
-                    <li
-                        class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
-                        <RouterLink to="/about">About</RouterLink>
+                    <li class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
+                        <RouterLink to="/user">User</RouterLink>
                     </li>
                     <li class="py-4 px-12 duration-500 hover:bg-violet-500/30 hover:font-semibold">
                         <button @click="logOut">Log Out</button>
                     </li>
                 </ul>
             </div>
-
-
         </nav>
     </header>
-
-
 </template>

@@ -44,10 +44,6 @@ const _handleChangeFilter = (newFilter) => {
   filter.value = newFilter
 }
 
-function filterTasks(selectedFilter) {
-  filter.value = selectedFilter;
-}
-
 onMounted(() => {
   tasksStore.fetchTasks()
 })
@@ -63,33 +59,30 @@ onMounted(() => {
     <RouterLink to="/"
       class="hidden sm:inline-block sm:absolute sm:left-4 sm:top-12 sm:text-lg sm:text-violet-500 sm:border sm:border-violet-500 sm:rounded-lg sm:py-2 sm:px-4  sm:hover:bg-violet-500 sm:hover:text-white">
       < Back </RouterLink>
-      <RouterLink to="/"
-      class="sm:hidden inline-block absolute left-4 top-5 text-lg text-violet-500 border border-violet-500 rounded-lg py-2 px-4  hover:bg-violet-500 hover:text-white">
-      < </RouterLink>
+        <RouterLink to="/"
+          class="sm:hidden inline-block absolute left-4 top-5 text-lg text-violet-500 border border-violet-500 rounded-lg py-2 px-4  hover:bg-violet-500 hover:text-white">
+          < </RouterLink>
 
-        <h2 class="inline-block text-3xl text-center text-gray-600 font-extrabold my-5 sm:my-10 sm:text-5xl"> Your <span
-            class="text-violet-500"> {{
-              route.params.taskType }} </span> list</h2>
+            <h2 class="inline-block text-3xl text-center text-gray-600 font-extrabold my-5 sm:my-10 sm:text-5xl"> Your
+              <span class="text-violet-500"> {{
+                route.params.taskType }} </span> list</h2>
 
+            <article class="sm:grid sm:gap-2 sm:grid-cols-2">
+              <div class="mx-4 my-6 sm:my-0 sm:order-last sm:border sm:border-purple-200 sm:rounded-xl p-4 sm:mx-4">
+                <SelectionBar @filter="_handleChangeFilter" />
 
-        <article class="sm:grid sm:gap-2 sm:grid-cols-2">
-          <div class="mx-4 my-6 sm:my-0 sm:order-last sm:border sm:border-purple-200 sm:rounded-xl p-4 sm:mx-4">
-            <SelectionBar @filter="_handleChangeFilter" />
+                <p class="py-4 text-sm text-gray-600">You have {{ numTasks }} task/s in this selection:</p>
 
-            <p class="py-4 text-sm text-gray-600">You have {{ numTasks }} task/s in this selection:</p>
+                <ul v-if="filteredTasks">
+                  <li v-for="task in filteredTasks" :key="task.id">
+                    <TaskBar :task="task" />
+                  </li>
+                </ul>
+              </div>
 
-            <ul v-if="filteredTasks">
-              <li v-for="task in filteredTasks" :key="task.id">
-                <TaskBar :task="task" />
-              </li>
-            </ul>
-          </div>
-
-
-          <div>
-            <AddingTask />
-          </div>
-
-        </article>
+              <div>
+                <AddingTask />
+              </div>
+            </article>
   </section>
 </template>

@@ -7,9 +7,7 @@ import { storeToRefs } from 'pinia'
 const taskTitle = ref('')
 const tasksStore = useTasksStore();
 const appStore = useAppStore();
-
 const { groupedTasks } = storeToRefs(tasksStore)
-
 const taskCreationError = ref(''); // Holds error messages for task creation
 const newTaskType = ref('');
 const selectedType = ref('');
@@ -26,7 +24,7 @@ const _addTask = async () => {
   try {
     await tasksStore.createNewTask({
       title: taskTitle.value,
-      task_type: showNewTypeInput.value ? newTaskType.value : selectedType.value, // Ensure this is included
+      task_type: showNewTypeInput.value ? newTaskType.value : selectedType.value, 
     });
 
     // Display confirmation message
@@ -58,9 +56,7 @@ const _handleTypeSelected = () => {
 }
 </script>
 
-
 <template>
-
   <section
     class="text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 text-white p-5 rounded-xl my-4 sm:my-0 mx-4 shadow-lg shadow-indigo-500/50">
     <h2 class="text-2xl font-extrabold">Add a new task</h2>
@@ -85,7 +81,4 @@ const _handleTypeSelected = () => {
         Add</button>
     </div>
   </section>
-
-
 </template>
-
