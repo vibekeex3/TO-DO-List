@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
-import TaskGroupView from '@/views/TaskGroupView.vue'; // Adjust the path as necessary
-
+import TaskGroupView from '@/views/TaskGroupView.vue'; 
 import { useUserStore } from '@/stores/userStore'
 
 const router = createRouter({
@@ -24,9 +23,9 @@ const router = createRouter({
     },
 
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('@/views/AboutView.vue')
+      path: '/user',
+      name: 'user',
+      component: () => import('@/views/UserView.vue')
     }
   ]
 })

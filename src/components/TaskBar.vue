@@ -23,13 +23,10 @@ const _editTask = async () => {
     await tasksStore.updateTask(editTask.value)
     console.log('Tarea actualizada !!')
     _isEditing.value = false
-
-
   } catch (error) {
     console.error('Error al actualizar la tarea....', error)
   }
 }
-
 const handleUpdateState = async () => {
   try {
     await _editTask()
@@ -39,9 +36,7 @@ const handleUpdateState = async () => {
 }
 
 // DELETION CONFIRMATION
-
 const _deleteTask = async () => {
-  // Logic to delete the task, possibly communicating with your backend or store
   try {
     await tasksStore.deleteTask(editTask.value.id);
     // Show confirmation message after successful deletion
@@ -50,7 +45,7 @@ const _deleteTask = async () => {
 
   } catch (error) {
     console.error('Error deleting task:', error);
-    // Optionally, show error in the confirmation message
+    // show error in the confirmation message
     _showConfirmationMessage('Error deleting task.', 'error')
   }
 };
@@ -60,7 +55,7 @@ const _showConfirmationMessage = (message, messageType) => {
   appStore.showNotification(message, messageType);
   setTimeout(() => {
     appStore.hideNotification();
-  }, 3000); // Adjust time as needed
+  }, 3000);
 };
 
 const _openConfirmModal = () => {
@@ -72,23 +67,20 @@ const confirmDelete = () => {
   isDialogVisible.value = false;
   _deleteTask();
 };
-
-// :class="{ green: editTask.is_complete, grey: !editTask.is_complete }">
-
 </script>
 
 <template>
-  <div class="border-purple-200 border shadow shadow-violet-500/50 text-gray-600 hover:text-white 
+  <div
+    class="border-purple-200 border shadow shadow-violet-500/50 text-gray-600 hover:text-white 
 				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500  p-2 my-2 rounded-lg  cursor-pointer"
-        :class="editTask.is_complete ? 'line-through' : 'no-underline'">
+    :class="editTask.is_complete ? 'line-through' : 'no-underline'">
 
     <div class="flex justify-between">
 
       <div class="flex items-center">
-        <input type="checkbox" @change="handleUpdateState" v-model="editTask.is_complete" class="mr-2"/>
-       <p>{{ editTask.title }}</p> 
+        <input type="checkbox" @change="handleUpdateState" v-model="editTask.is_complete" class="mr-2" />
+        <p>{{ editTask.title }}</p>
       </div>
-
 
       <div>
         <button @click="_handleEdit" class="mx-2"><font-awesome-icon icon="fa-solid fa-pen-to-square"
@@ -96,18 +88,15 @@ const confirmDelete = () => {
         <button @click="_openConfirmModal" class="mx-2"> <font-awesome-icon icon="fa-solid fa-lg fa-trash"
             size="lg" /></button>
       </div>
-
     </div>
-
 
     <div v-show="_isEditing">
-      <input type="text" v-model="editTask.title" 
-      class="border border-violet-200 text-violet-600 rounded-md py-1 px-2 my-2 w-full"/>
+      <input type="text" v-model="editTask.title"
+        class="border border-violet-200 text-violet-600 rounded-md py-1 px-2 my-2 w-full" />
 
       <button @click="_editTask"
-      class="border border-violet-200 rounded-md py-1 px-2 my-2 w-full hover:bg-slate-900/20">Save</button>
+        class="border border-violet-200 rounded-md py-1 px-2 my-2 w-full hover:bg-slate-900/20">Save</button>
     </div>
-
   </div>
 
   <ConfirmationDialog :isVisible="isDialogVisible" @confirm="confirmDelete" @cancel="() => isDialogVisible = false" />

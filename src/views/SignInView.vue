@@ -46,67 +46,71 @@ const _changeSignType = () => {
 </script>
 <template>
 	<article class="flex items-center">
-	<section>
-    <img src="../assets/images/signin-image.png" alt="A woman with origami" class="hidden lg:object-cover lg:w-full lg:inline-block lg:flex-2"/>
-</section>
+		<section>
+			<img src="../assets/images/signin-image.png" alt="A woman with origami"
+				class="hidden lg:object-cover lg:w-full lg:inline-block lg:flex-2" />
+		</section>
 
-	<section class="text-center w-full h-screen p-0 mt-20 
-	sm:h-[640px] sm:p-5 sm:pt-2 sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50  sm:mt-0
+		<section class="text-center w-full h-screen p-0 mt-20 
+	sm:h-[640px] sm:p-5 sm:pt-2  sm:rounded-xl sm:shadow-lg sm:shadow-indigo-500/50  sm:mt-0
 	md:m-28 lg:flex-1">
 
-	<img src="../assets/images/origamee-slogan.svg" alt="logo origamee, your little tool to conquer the world" class="max-w-80  mx-auto"/>
+			<img src="../assets/images/origamee-slogan.svg" alt="logo origamee, your little tool to conquer the world"
+				class="max-w-80  mx-auto" />
 
-		<form>
-		<!--inicio de sesión -->
-		<div v-if="signTypeLogin">
-			<span class="text-4xl font-extrabold">
-				<h1 class="bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-violet-500">Welcome back</h1>
-			</span>
+			<form>
+				<!--inicio de sesión -->
+				<div v-if="signTypeLogin">
+					<span class="text-4xl font-extrabold">
+						<h1 class="bg-clip-text text-transparent bg-gradient-to-r from-rose-500 to-violet-500">Welcome
+							back</h1>
+					</span>
 
-			<input v-model="loginUser" type="email" placeholder="Email" required
-				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
-			<input v-model="loginPassword" type="password" placeholder="Password" required
-				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+					<input v-model="loginUser" type="email" placeholder="Email" required
+						class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+					<input v-model="loginPassword" type="password" placeholder="Password" required
+						class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
 
-			<button type="button" @click.prevent.stop="signIn"
-				class="bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 hover:from-fuchsia-500 
+					<button type="button" @click.prevent.stop="signIn"
+						class="bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 hover:from-fuchsia-500 
 			hover:via-pink-500 hover:to-orange-500 text-white text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
-				Log in</button>
+						Log in</button>
 
-			<div>
-				<p class="font-bold text-gray-600">Don't have an account?</p>
-				<button type="button" @click.prevent.stop="_changeSignType"
-					class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
+					<div>
+						<p class="font-bold text-gray-600">Don't have an account?</p>
+						<button type="button" @click.prevent.stop="_changeSignType"
+							class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
 				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
-					Register</button>
-			</div>
-		</div>
+							Register</button>
+					</div>
+				</div>
 
-		<!--registro de usuario -->
-		<div v-else>
-			<h2 class="text-3xl font-extrabold text-violet-500">Create an account</h2>
+				<!--registro de usuario -->
+				<div v-else>
+					<h2 class="text-3xl font-extrabold text-violet-500">Create an account</h2>
 
-			<input v-model="registerUsername" type="username" placeholder="Username" required
-				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
-			<input v-model="registerEmail" type="email" placeholder="Email" required
-				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
-			<input v-model="registerPassword" type="password" placeholder="Password" required
-				class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+					<input v-model="registerUsername" type="username" placeholder="Username" required
+						class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+					<input v-model="registerEmail" type="email" placeholder="Email" required
+						class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
+					<input v-model="registerPassword" type="password" placeholder="Password" required
+						class="bg-transparent border border-indigo-300 hover:border-fuchsia-300 p-2 w-64 rounded-lg mx-auto block my-4" />
 
-			<button type="button" @click.prevent.stop="register"
-				class="bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 hover:from-fuchsia-500 
+					<button type="button" @click.prevent.stop="register"
+						class="bg-gradient-to-r from-indigo-500 via-purple-500 to-fuchsia-500 hover:from-fuchsia-500 
 			hover:via-pink-500 hover:to-orange-500 text-white text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
-				Register</button>
+						Register</button>
 
-			<div>
-				<p class="text-sm font-bold text-gray-600">Already have an account?</p>
-				<button type="button" @click.prevent.stop="_changeSignType"
-					class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
+					<div>
+						<p class="text-sm font-bold text-gray-600">Already have an account?</p>
+						<button type="button" @click.prevent.stop="_changeSignType"
+							class="border-purple-200 border shadow shadow-purple-500/50 text-purple-600 hover:text-white 
 				bg-gradient-to-r hover:from-fuchsia-500 hover:via-pink-500 hover:to-orange-500 text-lg font-bold p-3 w-64 rounded-xl mx-auto block my-6 cursor-pointer">
-					Log In</button>
-			</div>
-		</div>
-	</form>
-	</section>
-</article>
+							Log In</button>
+					</div>
+				</div>
+			</form>
+
+		</section>
+	</article>
 </template>
